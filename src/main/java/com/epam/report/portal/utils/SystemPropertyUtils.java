@@ -1,4 +1,4 @@
-package com.epam.report.portal.layers.core.utils;
+package com.epam.report.portal.utils;
 
 import lombok.extern.slf4j.Slf4j;
 

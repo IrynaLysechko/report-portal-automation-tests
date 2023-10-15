@@ -1,4 +1,4 @@
-package com.epam.report.portal.layers.core.logging;
+package com.epam.report.portal.logging;
 
 public interface Logger {
 

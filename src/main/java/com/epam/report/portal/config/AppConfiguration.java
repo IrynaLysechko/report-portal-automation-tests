@@ -1,6 +1,6 @@
-package com.epam.report.portal.layers.core.config;
+package com.epam.report.portal.config;
 
-import com.epam.report.portal.layers.core.utils.SystemPropertyUtils;
+import com.epam.report.portal.utils.SystemPropertyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;

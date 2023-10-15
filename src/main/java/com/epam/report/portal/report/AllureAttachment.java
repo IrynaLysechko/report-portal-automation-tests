@@ -1,6 +1,6 @@
-package com.epam.report.portal.layers.core.report;
+package com.epam.report.portal.report;
 
-import com.epam.report.portal.layers.core.config.AppConfiguration;
+import com.epam.report.portal.config.AppConfiguration;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +9,7 @@ import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnviro
 @Slf4j
 public class AllureAttachment implements ReportAttachment {
 
+    // TODO: Implement once browser driver logic will be added
     @Override
     public void attachScreenShootToReport() {
     }

@@ -1,7 +1,7 @@
-package com.epam.report.portal.layers.core.logging;
+package com.epam.report.portal.logging;
 
 import ch.qos.logback.classic.Level;
-import com.epam.report.portal.layers.core.config.AppConfiguration;
+import com.epam.report.portal.config.AppConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +11,7 @@ import java.util.Locale;
 public class LogbackConfiguration implements Logger {
 
     @Override
-    public  void setLogLevel() {
+    public void setLogLevel() {
         String logLevel;
         String logLevelInSysProps = System.getProperty("log.level");
         if (logLevelInSysProps != null) {
