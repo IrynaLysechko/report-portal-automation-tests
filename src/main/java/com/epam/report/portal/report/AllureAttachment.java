@@ -9,9 +9,9 @@ import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnviro
 @Slf4j
 public class AllureAttachment implements ReportAttachment {
 
-    // TODO: Implement once browser driver logic will be added
     @Override
     public void attachScreenShootToReport() {
+        // TODO: Implement once browser driver logic will be added
     }
 
     @Override
