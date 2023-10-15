@@ -1,8 +1,8 @@
 name: Quality Gate for Pull Requests
-'on':
-  push:
-    branches:
-      - feature-setUpCIForPR-1.0
+on:
+  pull_request:
+    types:
+      - opened
 jobs:
   build:
     runs-on: ubuntu-latest
