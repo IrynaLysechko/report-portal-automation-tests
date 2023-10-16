@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.8.1"
+}
+
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = '2.8.1'
+    autoconfigure = true
+    aspectjweaver = true
+}
+
+group 'report-portal-automation-tests'
+version 'release-1.0'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+
+    implementation group: 'org.testng', name: 'testng', version: '7.1.0'
+
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.13.5'
+    implementation group: 'com.github.automatedowl', name: 'allure-environment-writer', version: '1.0.0'
+
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.2.0'
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.0'
+
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.2.0'
+    implementation group: 'io.testsmith', name: 'webdriver-event-listeners', version: '0.3'
+
+    implementation group: 'org.awaitility', name: 'awaitility', version: '4.0.3'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
+
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.16.1'
+    implementation group: 'org.aspectj', name: 'aspectjtools', version: '1.8.13'
+
+    implementation group: 'commons-configuration', name: 'commons-configuration', version: '1.10'
+}
