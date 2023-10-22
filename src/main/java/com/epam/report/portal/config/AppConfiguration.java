@@ -72,7 +72,7 @@ public class AppConfiguration {
     }
 
     public static void setBearerToken(String token) {
-        setProperties("bearer.token", token);
+        setProperties("bearer.token", "bearer " + token);
     }
 
     public static String getBearerToken() {

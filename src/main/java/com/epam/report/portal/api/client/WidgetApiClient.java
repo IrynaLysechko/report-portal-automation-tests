@@ -9,19 +9,20 @@ import static io.restassured.RestAssured.given;
 public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
 
     private static final String BASE_URI = AppConfiguration.getReportPortalUrl();
-    private static final String BASE_PATH = "api/v1/" + AppConfiguration.getReportPortalProjectName() + "/widget";
+    private static final String BASE_PATH = "api/v1/";
 
     private final RequestSpecification widgetRequestSpecification = given()
-            .header("Authorization", "bearer " + AppConfiguration.getBearerToken());
+            .baseUri(BASE_URI)
+            .basePath(BASE_PATH)
+            .header("Authorization", AppConfiguration.getBearerToken());
 
     @Step
     public WidgetApiClient getWidgetById(int widgetId) {
         setResponse(widgetRequestSpecification
                 .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
                 .pathParam("widgetId", widgetId)
-                .get(BASE_URI + "api/v1/{projectName}/widget/{widgetId}")
+                .get("{projectName}/widget/{widgetId}")
         );
-
         return this;
     }
 
@@ -29,7 +30,7 @@ public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
     public WidgetApiClient getAllWidgetsName() {
         setResponse(widgetRequestSpecification
                 .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
-                .get(BASE_URI + "api/v1/{projectName}/widget/names/all"));
+                .get("{projectName}/widget/names/all"));
         return this;
     }
 }

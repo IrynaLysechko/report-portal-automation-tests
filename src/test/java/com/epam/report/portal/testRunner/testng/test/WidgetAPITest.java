@@ -1,22 +1,12 @@
-package com.epam.report.portal.testRunner.testng;
+package com.epam.report.portal.testRunner.testng.test;
 
-import com.epam.report.portal.api.client.AuthenticationApiClient;
 import com.epam.report.portal.api.client.WidgetApiClient;
-import com.epam.report.portal.config.AppConfiguration;
-import com.epam.report.portal.listeners.testng.TestListener;
+import com.epam.report.portal.testRunner.testng.BaseTest;
+import com.epam.report.portal.testRunner.testng.data.WidgetDataProvider;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(TestListener.class)
-public class WidgetAPITest {
-
-    @BeforeClass
-    public void setAccessToken() {
-        String token = new AuthenticationApiClient().getAccessTokenValue();
-        AppConfiguration.setBearerToken(token);
-    }
+public class WidgetAPITest extends BaseTest {
 
     @Test(dataProviderClass = WidgetDataProvider.class,
             dataProvider = "widgetIdProvider")

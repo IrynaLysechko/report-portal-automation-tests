@@ -73,7 +73,7 @@ task testUsingTestNG(type: Test) {
 task testUsingJunit(type: Test) {
     systemProperties(System.getProperties())
     useJUnitPlatform() {
-        include '**/junit/*Test.class'
+        include '**/junit/test/*Test.class'
     }
 }
 

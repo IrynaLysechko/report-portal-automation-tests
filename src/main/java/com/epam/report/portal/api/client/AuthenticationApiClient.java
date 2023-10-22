@@ -16,14 +16,13 @@ public class AuthenticationApiClient extends BaseApiClient<AuthenticationApiClie
 
     @Step
     public String getAccessTokenValue() {
-        sendAccessTokenRequest();
         String accessToken = getResponse().jsonPath().get("access_token");
         log.info("access token value is {}", accessToken);
         return accessToken;
     }
 
     @Step
-    private void sendAccessTokenRequest() {
+    public AuthenticationApiClient sendAccessTokenRequest() {
         setResponse(given()
                 .headers("Authorization", "Basic dWk6dWltYW4=",
                         "content-type", "application/x-www-form-urlencoded")
@@ -31,5 +30,6 @@ public class AuthenticationApiClient extends BaseApiClient<AuthenticationApiClie
                         "username", getUserName(),
                         "password", getUserPassword())
                 .post(AUTHENTICATION_URL));
+        return this;
     }
 }

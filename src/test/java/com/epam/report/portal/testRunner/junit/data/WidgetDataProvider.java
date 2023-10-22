@@ -1,4 +1,4 @@
-package com.epam.report.portal.testRunner.junit;
+package com.epam.report.portal.testRunner.junit.data;
 
 import java.util.stream.Stream;
 

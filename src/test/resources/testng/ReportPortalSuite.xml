@@ -3,7 +3,7 @@
 <suite name="Report Portal Test Suite" verbose="1">
     <test name="Report Portal Suite">
         <classes>
-            <class name="com.epam.report.portal.testRunner.testng.WidgetAPITest"/>
+            <class name="com.epam.report.portal.testRunner.testng.test.WidgetAPITest"/>
         </classes>
     </test>
 </suite>
