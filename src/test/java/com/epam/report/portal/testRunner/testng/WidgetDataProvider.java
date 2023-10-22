@@ -6,19 +6,19 @@ public class WidgetDataProvider {
 
     @DataProvider
     public Object[][] widgetIdProvider() {
-        return new Object[][] {
-                {130633},
-                {130632},
-                {130631},
-                {130630},
-                {130629},
-                {130628},
-                {130627},
-                {130626},
-                {130625},
-                {130624},
-                {130623},
-                {130622}
+        return new Object[][]{
+                {2},
+                {3},
+                {4},
+                {5},
+                {6},
+                {7},
+                {8},
+                {9},
+                {10},
+                {11},
+                {12},
+                {13}
         };
     }
 }

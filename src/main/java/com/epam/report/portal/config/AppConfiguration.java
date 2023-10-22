@@ -21,6 +21,10 @@ public class AppConfiguration {
         return properties.getProperty(name).toString();
     }
 
+    private static void setProperties(String propertyName, String propertyValue) {
+         properties.setProperty(propertyName, propertyValue);
+    }
+
     private void setPropertyFile() {
         try {
             log.info("Initializing property file");
@@ -51,7 +55,7 @@ public class AppConfiguration {
 
     public static String getUserPassword() {
         String userPassword = SystemPropertyUtils.getOrFail("rp.user.password");
-        log.info("user name is {}", userPassword);
+        log.info("user password is {}", userPassword);
         return userPassword;
     }
 
@@ -65,5 +69,13 @@ public class AppConfiguration {
 
     public static String getReportTool() {
         return getProperties("report.tool");
+    }
+
+    public static void setBearerToken(String token) {
+        setProperties("bearer.token", token);
+    }
+
+    public static String getBearerToken() {
+        return getProperties("bearer.token");
     }
 }
