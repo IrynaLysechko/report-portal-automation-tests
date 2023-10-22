@@ -39,6 +39,10 @@ public class AppConfiguration {
         return getProperties("reportPortal.url");
     }
 
+    public static String getReportPortalProjectName() {
+        return getProperties("reportPortal.project.name");
+    }
+
     public static String getUserName() {
         String userName = SystemPropertyUtils.getOrFail("rp.user.name");
         log.info("user name is {}", userName);
