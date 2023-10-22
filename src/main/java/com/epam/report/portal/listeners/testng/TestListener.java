@@ -20,6 +20,7 @@ public class TestListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onStart(ISuite suite) {
+        log.info("Running tests using TestNG Test Runner");
         AppConfiguration.setReportPortalProperties();
         setUpLogger();
         setUpReport();

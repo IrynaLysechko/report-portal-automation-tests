@@ -21,6 +21,7 @@ public class TestListener implements BeforeAllCallback, BeforeEachCallback, Test
 
     @Override
     public void beforeAll(ExtensionContext context) {
+        log.info("Running tests using Junit Test Runner");
         AppConfiguration.setReportPortalProperties();
         setUpLogger();
         setUpReport();
