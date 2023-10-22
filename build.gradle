@@ -26,6 +26,7 @@ dependencies {
     implementation group: 'org.testng', name: 'testng', version: '7.1.0'
 
     implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.24.0'
     implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.13.5'
     implementation group: 'io.qameta.allure', name: 'allure-commandline', version: '2.24.1', ext: 'pom'
     implementation group: 'com.github.automatedowl', name: 'allure-environment-writer', version: '1.0.0'
@@ -48,8 +49,9 @@ dependencies {
     implementation group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.19'
     implementation group: 'net.javacrumbs.json-unit', name: 'json-unit', version: '2.+'
 
-//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 }
 
 test {
@@ -66,9 +68,9 @@ test {
     reports.junitXml.destination = file("$buildDir/reports/tests/test/junitreports")
     reports.html.destination = file("$buildDir/reports/tests/test")
 
-//    useJUnit {
-//        include '**/junit/*Test.class'
-//    }
+    useJUnitPlatform() {
+        include '**/junit/*Test.class'
+    }
 }
 
 tasks.withType(Test) {

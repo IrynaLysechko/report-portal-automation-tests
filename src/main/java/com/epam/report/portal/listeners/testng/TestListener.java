@@ -1,4 +1,4 @@
-package com.epam.report.portal.listeners;
+package com.epam.report.portal.listeners.testng;
 
 import com.epam.report.portal.logging.LoggerManager;
 import com.epam.report.portal.report.ReportManager;

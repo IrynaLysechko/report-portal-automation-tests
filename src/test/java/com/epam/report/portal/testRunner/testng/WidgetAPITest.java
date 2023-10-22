@@ -1,7 +1,7 @@
 package com.epam.report.portal.testRunner.testng;
 
 import com.epam.report.portal.api.client.WidgetApiClient;
-import com.epam.report.portal.listeners.TestListener;
+import com.epam.report.portal.listeners.testng.TestListener;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
