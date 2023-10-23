@@ -29,6 +29,16 @@ public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
     }
 
     @Step
+    public WidgetApiClient getWidgetById(String widgetId) {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .pathParam("widgetId", widgetId)
+                .get("{projectName}/widget/{widgetId}")
+        );
+        return this;
+    }
+
+    @Step
     public WidgetApiClient sendWidgetPreviewRequest(WidgetPreviewData widgetPreviewData) {
         setResponse(widgetRequestSpecification
                 .pathParam("projectName", AppConfiguration.getReportPortalProjectName())

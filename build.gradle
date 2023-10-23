@@ -52,22 +52,20 @@ dependencies {
     implementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.9.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.8'
 }
 
 task testUsingTestNG(type: Test) {
     systemProperties(System.getProperties())
 
     useTestNG() {
-        suites './src/test/resources/testng/ReportPortalSuite.xml'
+        suites './src/test/resources/ReportPortalSuite.xml'
         options.useDefaultListeners true
         testLogging {
             events = ['PASSED', 'FAILED', 'SKIPPED']
         }
     }
-    reports.html.enabled = true
-    reports.junitXml.enabled = true
-    reports.junitXml.destination = file("$buildDir/reports/tests/test/junitreports")
-    reports.html.destination = file("$buildDir/reports/tests/test")
 }
 
 task testUsingJunit(type: Test) {
@@ -75,6 +73,8 @@ task testUsingJunit(type: Test) {
     useJUnitPlatform() {
         include '**/junit/test/*Test.class'
     }
+    reports.junitXml.enabled = true
+    reports.junitXml.destination = file("$buildDir/reports/tests/test/junitreports")
 }
 
 tasks.withType(Test) {
