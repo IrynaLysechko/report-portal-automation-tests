@@ -4,6 +4,8 @@ import com.epam.report.portal.api.client.WidgetApiClient;
 import com.epam.report.portal.entity.WidgetPreviewData;
 import com.epam.report.portal.testRunner.junit.BaseTest;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
