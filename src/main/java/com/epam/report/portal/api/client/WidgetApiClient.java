@@ -1,7 +1,9 @@
 package com.epam.report.portal.api.client;
 
 import com.epam.report.portal.config.AppConfiguration;
+import com.epam.report.portal.entity.WidgetPreviewData;
 import io.qameta.allure.Step;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
@@ -23,6 +25,16 @@ public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
                 .pathParam("widgetId", widgetId)
                 .get("{projectName}/widget/{widgetId}")
         );
+        return this;
+    }
+
+    @Step
+    public WidgetApiClient sendWidgetPreviewRequest(WidgetPreviewData widgetPreviewData) {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .contentType(ContentType.JSON)
+                .body(widgetPreviewData.toJson())
+                .post("{projectName}/widget/preview"));
         return this;
     }
 

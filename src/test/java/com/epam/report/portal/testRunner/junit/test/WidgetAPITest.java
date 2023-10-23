@@ -1,6 +1,7 @@
 package com.epam.report.portal.testRunner.junit.test;
 
 import com.epam.report.portal.api.client.WidgetApiClient;
+import com.epam.report.portal.entity.WidgetPreviewData;
 import com.epam.report.portal.testRunner.junit.BaseTest;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,14 @@ public class WidgetAPITest extends BaseTest {
     public void verifyUserIsAbleToGetWidgetById(int widgetId) {
         new WidgetApiClient()
                 .getWidgetById(widgetId)
+                .verifyStatusCode(HttpStatus.SC_OK);
+    }
+
+    @ParameterizedTest
+    @MethodSource("com.epam.report.portal.testRunner.junit.data.WidgetDataProvider#widgetPreviewDataProvider")
+    public void verifyUserIsAbleToGetAWidgetPreview(WidgetPreviewData widgetPreviewData) {
+        new WidgetApiClient()
+                .sendWidgetPreviewRequest(widgetPreviewData)
                 .verifyStatusCode(HttpStatus.SC_OK);
     }
 }
