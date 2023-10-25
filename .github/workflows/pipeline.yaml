@@ -25,5 +25,4 @@ jobs:
           distribution: 'adopt'
 
       - run: >-
-          ./gradlew clean test -Dlog.level=debug -Drp.user.name=$USER_NAME
-          -Drp.user.password=$USER_PASSWORD
+          ./gradlew build

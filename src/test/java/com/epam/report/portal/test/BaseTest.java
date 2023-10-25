@@ -1,6 +1,6 @@
-package com.epam.report.portal;
+package com.epam.report.portal.test;
 
-import com.epam.report.portal.listeners.TestListener;
+import com.epam.report.portal.listeners.testng.TestListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

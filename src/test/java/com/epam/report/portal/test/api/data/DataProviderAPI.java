@@ -1,4 +1,4 @@
-package com.epam.report.portal.api.data;
+package com.epam.report.portal.test.api.data;
 
 public class DataProviderAPI {
     //TODO

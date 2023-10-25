@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id "io.qameta.allure" version "2.11.2"
+    id "io.qameta.allure" version "2.11.0"
 }
 
 apply plugin: 'io.qameta.allure'
 
 allure {
-    version = '2.11.2'
+    version = '2.11.0'
 }
 
 group 'report-portal-automation-tests'
@@ -26,7 +26,9 @@ dependencies {
     implementation group: 'org.testng', name: 'testng', version: '7.1.0'
 
     implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.13.5'
     implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-commandline', version: '2.24.1', ext: 'pom'
     implementation group: 'com.github.automatedowl', name: 'allure-environment-writer', version: '1.0.0'
     implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.20'
 
@@ -45,20 +47,34 @@ dependencies {
     implementation group: 'commons-configuration', name: 'commons-configuration', version: '1.10'
 
     implementation group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.19'
+    implementation group: 'net.javacrumbs.json-unit', name: 'json-unit', version: '2.+'
+
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.8'
 }
 
-test {
+task testUsingTestNG(type: Test) {
     systemProperties(System.getProperties())
+
     useTestNG() {
+        suites './src/test/resources/ReportPortalSuite.xml'
         options.useDefaultListeners true
         testLogging {
             events = ['PASSED', 'FAILED', 'SKIPPED']
         }
     }
-    reports.html.enabled = true
+}
+
+task testUsingJunit(type: Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform() {
+        include '**/junit/test/*Test.class'
+    }
     reports.junitXml.enabled = true
     reports.junitXml.destination = file("$buildDir/reports/tests/test/junitreports")
-    reports.html.destination = file("$buildDir/reports/tests/test")
 }
 
 tasks.withType(Test) {
