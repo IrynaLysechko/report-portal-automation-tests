@@ -6,6 +6,23 @@ import java.util.List;
 
 public class WidgetPreviewDataFactory {
 
+    public static WidgetPreviewData createWidgetPreviewData(String widgetType) {
+        switch (widgetType) {
+            case "lineChartWidget":
+                return createLineChartWidget();
+            case "flakyTestCasesWidget":
+                return createFlakyTestCasesWidget();
+            case "overallStatisticsWidget":
+                return createOverallStatisticsWidget();
+            case "statisticTrendBarWidget":
+                return createStatisticTrendBarWidget();
+            case "statisticTrendAreaWidget":
+                return createStatisticTrendAreaWidget();
+            default:
+                throw new IllegalArgumentException("Can not create widget preview data for widget type " + widgetType);
+        }
+    }
+
     public static WidgetPreviewData createLineChartWidget() {
         return WidgetPreviewData.builder()
                 .contentParameters(WidgetPreviewData.ContentParameters.builder()

@@ -4,6 +4,7 @@
 /build/
 /libs/
 log/
+target/
 *.iml
 **/.DS_Store
 
