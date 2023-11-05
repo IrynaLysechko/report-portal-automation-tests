@@ -30,11 +30,11 @@ Feature: Widget API testing
 
       Examples:
         | Widget ID | Status Code | Response Field | Expected Value                      |
-        | 2         | 200         | name           | LAUNCH STATISTICS AREA              |
-        | 3         | 200         | name           | LAUNCH STATISTICS BAR               |
-        | 4         | 200         | name           | INVESTIGATED PERCENTAGE OF LAUNCHES |
-        | 5         | 200         | name           | TEST CASES GROWTH TREND CHART       |
-        | 6         | 200         | name           | OVERALL STATISTICS PANEL            |
+        | 137217    | 200         | name           | LAUNCH STATISTICS AREA              |
+        | 137218    | 200         | name           | LAUNCH STATISTICS BAR               |
+        | 137219    | 200         | name           | INVESTIGATED PERCENTAGE OF LAUNCHES |
+        | 137220    | 200         | name           | TEST CASES GROWTH TREND CHART       |
+        | 137221    | 200         | name           | OVERALL STATISTICS PANEL            |
 
 
   Rule: API calls to widget review

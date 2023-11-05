@@ -16,17 +16,17 @@ public class WidgetDataProvider {
 
     @DataProvider(parallel = true)
     public Object[] widgetIdProvider() {
-        return new Object[]{2, 3, 4, 5, 6};
+        return new Object[]{137217, 137218, 137219, 137220, 137221};
     }
 
     @DataProvider(parallel = true)
     public Object[][] widgetIdAndNameProvider() {
         return new Object[][]{
-                {2, "LAUNCH STATISTICS AREA"},
-                {3, "LAUNCH STATISTICS BAR"},
-                {4, "INVESTIGATED PERCENTAGE OF LAUNCHES"},
-                {5, "TEST CASES GROWTH TREND CHART"},
-                {6, "OVERALL STATISTICS PANEL"}
+                {137217, "LAUNCH STATISTICS AREA"},
+                {137218, "LAUNCH STATISTICS BAR"},
+                {137219, "INVESTIGATED PERCENTAGE OF LAUNCHES"},
+                {137220, "TEST CASES GROWTH TREND CHART"},
+                {137221, "OVERALL STATISTICS PANEL"}
         };
     }
 
