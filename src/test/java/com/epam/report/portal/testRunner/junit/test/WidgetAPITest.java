@@ -36,7 +36,7 @@ public class WidgetAPITest extends BaseTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/failed_status_code.csv")
+    @CsvFileSource(resources = "/testRunner/failed_status_code.csv")
     public void verifyStatusCodeIsFailedForWrongWidgetId(String widgetId, int expectedStatusCode) {
         new WidgetApiClient()
                 .getWidgetById(widgetId)

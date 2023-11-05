@@ -32,7 +32,7 @@ public class WidgetDataProvider {
 
     @DataProvider(parallel = true)
     public Iterator<Object[]> csvDataProvider() throws IOException, CsvException {
-        return new CSVReader(new FileReader(BASE_RESOURCES_PATH + "failed_status_code.csv"))
+        return new CSVReader(new FileReader(BASE_RESOURCES_PATH + "testRunner/failed_status_code.csv"))
                 .readAll()
                 .stream()
                 .filter(line -> line.length == 2)
