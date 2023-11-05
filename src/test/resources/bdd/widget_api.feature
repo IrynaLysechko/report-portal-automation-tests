@@ -6,6 +6,9 @@ Feature: Widget API testing
   Rule: API calls to retries widgets by id
 
     Scenario: Verify user user is able to receive all widget names
+      Given scenario variable initialization:
+        | SCENARIO_VARIABLE  | VALUE |
+        | preview_pages_path | page. |
       When the user send request to receive all widget names
       Then the response status code is 200
       And the response contains following names:
@@ -16,12 +19,11 @@ Feature: Widget API testing
         | OVERALL STATISTICS PANEL            |
       But the response not contains following names:
         | Test Widget |
-      And response field pages contains:
+      And response field preview_pages_path contains:
         | number        | 1  |
         | size          | 20 |
         | totalElements | 12 |
         | totalPages    | 1  |
-
 
     Scenario Outline: Verify user is able to receive widget by id with correct name
       When the user retrieves a widget by id <Widget ID>
@@ -37,7 +39,7 @@ Feature: Widget API testing
         | 137221    | 200         | name           | OVERALL STATISTICS PANEL            |
 
 
-  Rule: API calls to widget review
+  Rule: API calls to widget preview
 
     Scenario Outline: Verify user is able to get a widget preview
       And the user has a widget preview request for widget type <Widget Type>
