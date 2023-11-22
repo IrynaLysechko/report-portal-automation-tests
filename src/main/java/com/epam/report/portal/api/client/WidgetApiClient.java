@@ -55,4 +55,43 @@ public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
                 .get("{projectName}/widget/names/all"));
         return this;
     }
+
+    @Step
+    public WidgetApiClient sendUnauthorizedRequestToGetWidgets() {
+        setResponse(given()
+                .baseUri(BASE_URI)
+                .basePath(BASE_PATH)
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .get("{projectName}/widget/names/all"));
+        return this;
+    }
+
+    @Step
+    public WidgetApiClient sendRequestForNotExistingProjectName() {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", "personal")
+                .get("{projectName}/widget/names/all"));
+        return this;
+    }
+
+    @Step
+    public WidgetApiClient sendRequestToCreateWidgetOnDashboard(String widgetJson) {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .contentType(ContentType.JSON)
+                .body(widgetJson)
+                .post("{projectName}/widget")
+        );
+        return this;
+    }
+
+    @Step
+    public WidgetApiClient sendRequestToDeleteWidgetFromDashboard(int widgetId) {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .pathParam("dashboardId", AppConfiguration.getProjectDashboardId())
+                .pathParam("widgetId", widgetId)
+                .delete("{projectName}/dashboard/{dashboardId}/{widgetId}"));
+        return this;
+    }
 }

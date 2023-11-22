@@ -60,6 +60,18 @@ dependencies {
     implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.14.0'
 }
 
+test() {
+    systemProperties(System.getProperties())
+
+    useTestNG() {
+        suites './src/test/resources/test/ReportPortalSuite.xml'
+        options.useDefaultListeners true
+        testLogging {
+            events = ['PASSED', 'FAILED', 'SKIPPED']
+        }
+    }
+}
+
 task testUsingTestNG(type: Test) {
     systemProperties(System.getProperties())
 

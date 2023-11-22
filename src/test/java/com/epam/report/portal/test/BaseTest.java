@@ -1,14 +1,21 @@
 package com.epam.report.portal.test;
 
+import com.epam.report.portal.api.client.AuthenticationApiClient;
+import com.epam.report.portal.config.AppConfiguration;
 import com.epam.report.portal.listeners.testng.TestListener;
+import org.apache.http.HttpStatus;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    @Test
-    public void test() {
-
+    @BeforeSuite
+    public void setAccessToken() {
+        String token = new AuthenticationApiClient()
+                .sendAccessTokenRequest()
+                .verifyStatusCode(HttpStatus.SC_OK)
+                .getAccessTokenValue();
+        AppConfiguration.setBearerToken(token);
     }
 }
