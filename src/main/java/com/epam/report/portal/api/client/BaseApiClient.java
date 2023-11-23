@@ -83,5 +83,10 @@ public abstract class BaseApiClient<T extends BaseApiClient<T>> {
     public void verifyResponseField(String jsonPath, String expected) {
         Assertions.assertThat(response.then().extract().jsonPath().getString(jsonPath)).isEqualTo(expected);
     }
+
+    @Step
+    public void verifyResponseFieldContainsValue(String jsonPath, String expected) {
+        Assertions.assertThat(response.then().extract().jsonPath().getString(jsonPath)).contains(expected);
+    }
 }
 
