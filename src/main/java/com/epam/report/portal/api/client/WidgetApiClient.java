@@ -94,4 +94,15 @@ public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
                 .delete("{projectName}/dashboard/{dashboardId}/{widgetId}"));
         return this;
     }
+
+    @Step
+    public WidgetApiClient sendRequestToUpdateWidget(int widgetId, String updatedWidget) {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .pathParam("widgetId", widgetId)
+                .contentType(ContentType.JSON)
+                .body(updatedWidget)
+                .put("{projectName}/widget/{widgetId}"));
+        return this;
+    }
 }
