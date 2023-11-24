@@ -7,14 +7,16 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static com.epam.report.portal.test.Constants.WIDGET_JSON_PATH;
 import static com.epam.report.portal.utils.FileReader.readFileFromTestResourcesToString;
 
+@Test(groups = {"delete", "all", "api"})
 public class WidgetDeletePositiveTest extends BaseTest {
 
-   @Test
+    @Test
    public void verifyUserIsAbleToDeleteWidgetFromDashboardByID() throws IOException {
        String widgetJson = readFileFromTestResourcesToString(
-               "test/widgetsJson/project_activity_panel_widget.json");
+               WIDGET_JSON_PATH + "project_activity_panel_widget.json");
        int widgetId = new WidgetApiClient()
                .sendRequestToCreateWidgetOnDashboard(widgetJson)
                .verifyStatusCode(HttpStatus.SC_CREATED)

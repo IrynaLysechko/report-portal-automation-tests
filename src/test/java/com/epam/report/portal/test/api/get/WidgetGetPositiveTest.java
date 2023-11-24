@@ -7,6 +7,7 @@ import com.epam.report.portal.test.api.data.DataProviderAPI;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
+@Test(groups = {"api", "get", "all"})
 public class WidgetGetPositiveTest extends BaseTest {
 
     @Test

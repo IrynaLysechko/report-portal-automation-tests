@@ -62,9 +62,11 @@ dependencies {
 
 test() {
     systemProperties(System.getProperties())
-
     useTestNG() {
         suites './src/test/resources/test/ReportPortalSuite.xml'
+        if (System.getProperty('groups') != null) {
+            includeGroups System.getProperty('groups')
+        }
         options.useDefaultListeners true
         testLogging {
             events = ['PASSED', 'FAILED', 'SKIPPED']

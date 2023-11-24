@@ -7,16 +7,23 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static com.epam.report.portal.test.Constants.WIDGET_JSON_PATH;
 import static com.epam.report.portal.utils.FileReader.readFileFromTestResourcesToString;
 
+@Test(groups = {"api", "post", "all"})
 public class WidgetPostPositiveTest extends BaseTest {
 
     @Test
     public void verifyUserIsAbleToCreateWidgetWithValidData() throws IOException {
         String widgetJson = readFileFromTestResourcesToString(
-                "test/widgetsJson/project_activity_panel_widget.json");
-        new WidgetApiClient()
+                WIDGET_JSON_PATH + "project_activity_panel_widget.json");
+        int widgetId = new WidgetApiClient()
                 .sendRequestToCreateWidgetOnDashboard(widgetJson)
-                .verifyStatusCode(HttpStatus.SC_CREATED);
+                .verifyStatusCode(HttpStatus.SC_CREATED)
+                .getResponse()
+                .jsonPath()
+                .getInt("id");
+        new WidgetApiClient()
+                .sendRequestToDeleteWidgetFromDashboard(widgetId);
     }
 }

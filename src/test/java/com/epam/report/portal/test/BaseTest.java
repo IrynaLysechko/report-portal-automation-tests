@@ -10,7 +10,7 @@ import org.testng.annotations.Listeners;
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setAccessToken() {
         String token = new AuthenticationApiClient()
                 .sendAccessTokenRequest()

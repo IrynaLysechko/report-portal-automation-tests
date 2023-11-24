@@ -5,6 +5,7 @@ import com.epam.report.portal.test.BaseTest;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
+@Test(groups = {"api", "get", "all"})
 public class WidgetGetNegativeTest extends BaseTest {
 
     @Test
