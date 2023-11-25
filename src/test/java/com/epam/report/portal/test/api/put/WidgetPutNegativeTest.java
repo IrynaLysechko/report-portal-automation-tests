@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 import static com.epam.report.portal.test.Constants.WIDGET_JSON_PATH;
-import static com.epam.report.portal.test.api.data.MessageConstants.INCORRECT_REQUEST_MESSAGE;
+import static com.epam.report.portal.test.api.data.MessageConstants.*;
 import static com.epam.report.portal.utils.FileReader.readFileFromTestResourcesToString;
 
 @Test(groups = {"api", "put", "all"})
@@ -22,8 +22,8 @@ public class WidgetPutNegativeTest extends BaseTest {
         new WidgetApiClient()
                 .sendRequestToUpdateWidget(1, widgetJson)
                 .verifyStatusCode(HttpStatus.SC_NOT_FOUND)
-                .verifyResponseFieldContainsValue("message", String.format("Widget with ID '%s' not found on " +
-                        "project '%s'. Did you use correct Widget ID?", 1, AppConfiguration.getReportPortalProjectName()));
+                .verifyResponseFieldContainsValue("message", String.format(
+                        WIDGET_NOT_FOUND_MESSAGE, 1, AppConfiguration.getReportPortalProjectName()));
     }
 
     @Test

@@ -57,6 +57,15 @@ public class WidgetApiClient extends BaseApiClient<WidgetApiClient>{
     }
 
     @Step
+    public WidgetApiClient sendRequestToFilterWidgets(String filterName, String filterValue) {
+        setResponse(widgetRequestSpecification
+                .pathParam("projectName", AppConfiguration.getReportPortalProjectName())
+                .queryParam(filterName, filterValue)
+                .get("{projectName}/widget/names/all"));
+        return this;
+    }
+
+    @Step
     public WidgetApiClient sendUnauthorizedRequestToGetWidgets() {
         setResponse(given()
                 .baseUri(BASE_URI)

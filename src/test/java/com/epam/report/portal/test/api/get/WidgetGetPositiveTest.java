@@ -1,10 +1,12 @@
 package com.epam.report.portal.test.api.get;
 
 import com.epam.report.portal.api.client.WidgetApiClient;
+import com.epam.report.portal.entity.FilterResponse;
 import com.epam.report.portal.entity.WidgetPreviewData;
 import com.epam.report.portal.test.BaseTest;
 import com.epam.report.portal.test.api.data.DataProviderAPI;
 import org.apache.http.HttpStatus;
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 @Test(groups = {"api", "get", "all"})
@@ -15,6 +17,17 @@ public class WidgetGetPositiveTest extends BaseTest {
         new WidgetApiClient()
                 .getAllWidgetsName()
                 .verifyStatusCode(HttpStatus.SC_OK);
+    }
+
+    @Test
+    public void verifyUserIsAbleToFilterWidgetsByName() {
+        String filterValue = "LAUNCH STATISTICS AREA";
+        FilterResponse filterResponse = new WidgetApiClient()
+                .sendRequestToFilterWidgets("filter.eq.name", filterValue)
+                .verifyStatusCode(HttpStatus.SC_OK)
+                .getResponse()
+                .as(FilterResponse.class);
+        Assertions.assertThat(filterResponse.getContent()).contains(filterValue);
     }
 
     @Test(dataProviderClass = DataProviderAPI.class,

@@ -15,7 +15,7 @@ import static com.epam.report.portal.utils.FileReader.readFileFromTestResourcesT
 public class WidgetPutPositiveTest extends BaseTest {
 
     @Test
-    public void verifyUserIsAbleToUpdateWidget() throws IOException {
+    public void verifyUserIsAbleToUpdateExistingWidget() throws IOException {
         String widgetJson = readFileFromTestResourcesToString(
                 WIDGET_JSON_PATH + "project_activity_panel_widget.json");
         int widgetId = new WidgetApiClient()
