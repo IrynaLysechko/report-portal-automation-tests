@@ -5,11 +5,15 @@ import com.epam.report.portal.entity.FilterResponse;
 import com.epam.report.portal.entity.WidgetPreviewData;
 import com.epam.report.portal.test.BaseTest;
 import com.epam.report.portal.test.api.data.DataProviderAPI;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 @Test(groups = {"api", "get", "all"})
+@Epic("Get API Request")
+@Feature("Positive tests")
 public class WidgetGetPositiveTest extends BaseTest {
 
     @Test

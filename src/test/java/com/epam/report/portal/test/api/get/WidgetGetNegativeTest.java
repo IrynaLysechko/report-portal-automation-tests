@@ -2,10 +2,14 @@ package com.epam.report.portal.test.api.get;
 
 import com.epam.report.portal.api.client.WidgetApiClient;
 import com.epam.report.portal.test.BaseTest;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 @Test(groups = {"api", "get", "all"})
+@Epic("Get API Request")
+@Feature("Negative tests")
 public class WidgetGetNegativeTest extends BaseTest {
 
     @Test

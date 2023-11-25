@@ -2,6 +2,8 @@ package com.epam.report.portal.test.api.put;
 
 import com.epam.report.portal.api.client.WidgetApiClient;
 import com.epam.report.portal.test.BaseTest;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
@@ -12,6 +14,8 @@ import static com.epam.report.portal.test.api.data.MessageConstants.SUCCESSFULLY
 import static com.epam.report.portal.utils.FileReader.readFileFromTestResourcesToString;
 
 @Test(groups = {"api", "put", "all"})
+@Epic("Put API Request")
+@Feature("Positive tests")
 public class WidgetPutPositiveTest extends BaseTest {
 
     @Test
