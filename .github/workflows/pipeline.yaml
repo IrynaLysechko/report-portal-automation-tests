@@ -25,4 +25,4 @@ jobs:
           distribution: 'adopt'
 
       - run: >-
-          ./gradlew build
+          ./gradlew test -Drp.user.name=${RP_USER_NAME} -Drp.user.password=${RP_USER_PASSWORD}
