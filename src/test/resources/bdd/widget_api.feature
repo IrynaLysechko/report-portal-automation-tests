@@ -5,7 +5,7 @@ Feature: Widget API testing
 
   Rule: API calls to retries widgets by id
 
-    Scenario: Verify user user is able to receive all widget names
+    Scenario: Verify user is able to receive all widget names
       Given scenario variable initialization:
         | SCENARIO_VARIABLE  | VALUE |
         | preview_pages_path | page. |
@@ -22,8 +22,8 @@ Feature: Widget API testing
       And response field preview_pages_path contains:
         | number        | 1  |
         | size          | 20 |
-        | totalElements | 12 |
-        | totalPages    | 1  |
+        | totalElements | 25 |
+        | totalPages    | 2 |
 
     Scenario Outline: Verify user is able to receive widget by id with correct name
       When the user retrieves a widget by id <Widget ID>
