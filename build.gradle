@@ -38,11 +38,11 @@ dependencies {
     implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.0'
 
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
-    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.2.0'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.5.3'
     implementation group: 'io.testsmith', name: 'webdriver-event-listeners', version: '0.3'
 
     implementation group: 'org.awaitility', name: 'awaitility', version: '4.0.3'
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.14'
 
     implementation group: 'org.assertj', name: 'assertj-core', version: '3.16.1'
 

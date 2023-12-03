@@ -1,11 +1,13 @@
 package com.epam.report.portal.test.ui;
 
-import com.epam.report.portal.config.AppConfiguration;
 import com.epam.report.portal.factory.driver.DriverManager;
 import com.epam.report.portal.listeners.testng.TestListener;
+import com.epam.report.portal.ui.bo.LogInBusinessObject;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+
+import static com.epam.report.portal.config.AppConfiguration.*;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -14,7 +16,14 @@ public class BaseTest {
     public void getDriver() {
         DriverManager
                 .getDriver()
-                .get(AppConfiguration.getReportPortalUrl());
+                .get(getReportPortalUrl());
+    }
+
+    @BeforeMethod(dependsOnMethods = "getDriver")
+    public void logIn() throws InterruptedException {
+        new LogInBusinessObject()
+                .logIn(getUserName(), getUserPassword())
+                .verifyLogIn();
     }
 
     @AfterMethod(alwaysRun = true)
