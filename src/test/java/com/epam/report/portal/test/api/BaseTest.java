@@ -1,4 +1,4 @@
-package com.epam.report.portal.test;
+package com.epam.report.portal.test.api;
 
 import com.epam.report.portal.api.client.AuthenticationApiClient;
 import com.epam.report.portal.config.AppConfiguration;
