@@ -3,6 +3,7 @@ package com.epam.report.portal.test.ui;
 import com.epam.report.portal.factory.driver.DriverManager;
 import com.epam.report.portal.listeners.testng.TestListener;
 import com.epam.report.portal.ui.bo.LogInBusinessObject;
+import com.epam.report.portal.ui.pages.DashboardPageObject;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -20,10 +21,11 @@ public class BaseTest {
     }
 
     @BeforeMethod(dependsOnMethods = "getDriver")
-    public void logIn() throws InterruptedException {
+    public void logIn() {
         new LogInBusinessObject()
-                .logIn(getUserName(), getUserPassword())
-                .verifyLogIn();
+                .logIn(getUserName(), getUserPassword());
+        new DashboardPageObject()
+                .verifyUserIsLogIn();
     }
 
     @AfterMethod(alwaysRun = true)

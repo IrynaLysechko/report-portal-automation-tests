@@ -82,4 +82,12 @@ public class AppConfiguration {
     public static int getProjectDashboardId() {
         return Integer.parseInt(getProperties("reportPortal.project.dashboard.id"));
     }
+
+    public static String getProjectDashboardUIURI() {
+        return getProperties("reportPortal.dashboard.uri");
+    }
+
+    public static String getProjectLaunchUIURI() {
+        return getProperties("reportPortal.launch.uri");
+    }
 }
