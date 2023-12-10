@@ -14,8 +14,8 @@
 
 <!--            <class name="com.epam.report.portal.test.api.put.WidgetPutPositiveTest"/>-->
 <!--            <class name="com.epam.report.portal.test.api.put.WidgetPutNegativeTest"/>-->
-            <class name="com.epam.report.portal.test.ui.WidgetDashboardTest"/>
-<!--            <class name="com.epam.report.portal.test.ui.WidgetEditTest"/>-->
+<!--            <class name="com.epam.report.portal.test.ui.WidgetDashboardTest"/>-->
+            <class name="com.epam.report.portal.test.ui.WidgetEditTest"/>
         </classes>
     </test>
 </suite>

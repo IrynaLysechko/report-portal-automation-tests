@@ -1,14 +1,11 @@
 package com.epam.report.portal.ui.pages;
 
-import com.epam.report.portal.factory.driver.DriverManager;
 import com.epam.report.portal.utils.Waits;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 
 import static com.epam.report.portal.config.AppConfiguration.getProjectDashboardId;
 import static com.epam.report.portal.config.AppConfiguration.getProjectDashboardUIURI;
@@ -17,67 +14,26 @@ import static com.epam.report.portal.utils.Waits.waitUntilElementAppears;
 @Slf4j
 public class DashboardPageObject extends AbstractPage {
 
-    @FindBy(xpath = "//button[@type='button']/span[text()='Add new widget']")
-    private WebElement addNewWidgetButton;
+    private final String addNewWidgetButtonXpath = "//button[@type='button']/span[text()='Add new widget']";
 
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS AREA']/ancestor::div[contains(@style, 'transform')]")
-    private WebElement launchStatisticsAreaContainer;
+    private final String widgetContainerXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]";
+    private final String widgetDraggableElementXpath = "//div[text()='%s']/ancestor::div[contains(@class, 'draggable-field')]";
+    private final String widgetResizableElementXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//span[contains(@class, 'resizable')]";
+    private final String widgetHeaderElementXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__info-block')]";
+    private final String widgetEditButtonXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[1]";
+    private final String deleteWidgetButtonXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[3]";
+    private final String fullyPassedDemoLaunchFromWidget = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class, 'launch-statistics-chart')]//*[local-name()='g' and contains(@class, 'c3-chart-bars')]//*[local-name()='g' and contains(@class, 'c3-shapes-statistics$executions$passed')]//*[local-name()='path'][5]";
 
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS BAR']/ancestor::div[contains(@style, 'transform')]")
-    private WebElement launchStatisticsBarContainer;
+    private final String firstAvailableWidgetTypeRadioButtonXpath = "//div[@class='widget-type-selector']//div[2]//span[contains(@class, 'inputRadio__at-top')]";
+    private final String nextStepButtonXpath = "//span[text()='Next step']/ancestor::button";
+    private final String editWidgetModalWindowXpath = "//div[contains(@class, 'edit-widget-modal')]";
+    private final String demoFilterRadioButtonXpath = "//span[contains(@class,'inputRadio__at')]";
+    private final String editWidgetNameInputXpath = "//input[@placeholder='Enter widget name']";
+    private final String addButtonXpath = "//button[text()='Add']";
+    private final String deleteWidgetModalWindowXpath = "//div[contains(@class, 'modal-window-animation-enter-done')]";
+    private final String confirmationDeleteWidgetButtonXpath = "//button[text()='Delete']";
 
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS AREA']/ancestor::div[contains(@class, 'draggable-field')]")
-    private WebElement launchStatisticsAreaDragableField;
-
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS BAR']/ancestor::div[contains(@class, 'draggable-field')]")
-    private WebElement launchStatisticsBarDragableField;
-
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS AREA']/ancestor::div[contains(@style, 'transform')]//span[contains(@class, 'resizable')]")
-    private WebElement launchStatisticsAreaResizableElement;
-
-    @FindBy(xpath = "//div[text()='Test Widget']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__info-block')]")
-    private WebElement testWidgetHeader;
-
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS BAR']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[1]")
-    private WebElement launchStatisticsBarEditButton;
-
-    @FindBy(xpath = "//div[@class='widget-type-selector']//div[2]//span[contains(@class, 'inputRadio__at-top')]")
-    private WebElement firstAvailableWidgetTypeRadioButton;
-
-    @FindBy(xpath = "//span[text()='Next step']/ancestor::button")
-    private WebElement nextStepButton;
-
-    @FindBy(xpath = "//div[text()='Test Widget']/ancestor::div[contains(@style, 'transform')]")
-    private WebElement testWidgetContainer;
-
-    @FindBy(xpath = "//div[text()='Test Widget']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[1]")
-    private WebElement testWidgetEditButton;
-
-    @FindBy(xpath = "//div[contains(@class, 'edit-widget-modal')]")
-    private WebElement editWidgetWindow;
-
-    @FindBy(xpath = "//span[contains(@class,'inputRadio__at')]")
-    private WebElement demoFilterRadioButton;
-
-    @FindBy(xpath = "//input[@placeholder='Enter widget name']")
-    private WebElement editWidgetNameInput;
-
-    @FindBy(xpath = "//button[text()='Add']")
-    private WebElement addButton;
-
-    @FindBy(xpath = "//div[text()='Test Widget']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[3]")
-    private WebElement testWidgetDeleteButton;
-
-    @FindBy(xpath = "//div[contains(@class, 'modal-window-animation-enter-done')]")
-    private WebElement deleteWidgetModalWindow;
-
-    @FindBy(xpath = "//button[text()='Delete']")
-    private WebElement confirmToDeleteWidgetButton;
-
-    @FindBy(xpath = "//div[text()='LAUNCH STATISTICS BAR']/ancestor::div[contains(@style, 'transform')]//div[contains(@class, 'launch-statistics-chart')]//*[local-name()='g' and contains(@class, 'c3-chart-bars')]//*[local-name()='g' and contains(@class, 'c3-shapes-statistics$executions$passed')]//*[local-name()='path'][5]")
-    private WebElement passedDemoLaunch;
-
-    private String DASHBOARD_URI = getProjectDashboardUIURI() + "/" + getProjectDashboardId();
+    private final String DASHBOARD_URI = getProjectDashboardUIURI() + "/" + getProjectDashboardId();
 
     public DashboardPageObject openDashboardPage() {
         openPage(DASHBOARD_URI);
@@ -90,132 +46,123 @@ public class DashboardPageObject extends AbstractPage {
     }
 
     public DashboardPageObject verifyEditWidgetWindowIsOpen() {
-        waitUntilElementAppears(editWidgetWindow);
+        waitUntilElementAppears(findByXpath(editWidgetModalWindowXpath));
         return this;
     }
 
     public DashboardPageObject clickAddNewWidgetButton() {
-        addNewWidgetButton.click();
+        findByXpath(addNewWidgetButtonXpath).click();
         return this;
     }
 
-    public DashboardPageObject dragAndDropLaunchStatisticsContainers() {
-        new Actions(DriverManager.getDriver())
-                .dragAndDrop(launchStatisticsAreaDragableField, launchStatisticsBarDragableField)
+    public DashboardPageObject performDragAndDropAction(String widgetNameFrom, String widgetNameTo) {
+        WebElement webElementFrom = findByXpath(
+                format(widgetDraggableElementXpath, widgetNameFrom));
+        WebElement webElementTo = findByXpath(
+                format(widgetDraggableElementXpath, widgetNameTo));
+        new Actions(driver)
+                .dragAndDrop(webElementFrom, webElementTo)
                 .build()
                 .perform();
         return this;
     }
 
-    public String getLaunchStatisticsAreaContainerPosition() {
-        log.debug("area position");
-        return getContainerPosition(launchStatisticsAreaContainer);
+    public String getWidgetContainerPosition(String widgetName) {
+        WebElement widget = findByXpath(format(widgetContainerXpath, widgetName));
+        return getContainerPosition(widget);
     }
 
-    public String getLaunchStatisticsBarContainerPosition() {
-        log.debug("bar position");
-        return getContainerPosition(launchStatisticsBarContainer);
-    }
-
-    public void performWidgetRezise(int horizontalOffset, int verticalOffset) {
-        new Actions(DriverManager.getDriver())
-                .clickAndHold(launchStatisticsAreaResizableElement)
+    public void performWidgetResize(String widgetName, int horizontalOffset, int verticalOffset) {
+        WebElement webElement = findByXpath(format(widgetResizableElementXpath, widgetName));
+        new Actions(driver)
+                .clickAndHold(webElement)
                 .moveByOffset(horizontalOffset, verticalOffset)
                 .release()
                 .build()
                 .perform();
     }
 
-    public int getWidgetWidth(){
-        int width = launchStatisticsAreaContainer.getSize().getWidth();
+    public int getWidgetWidth(String widgetName) {
+        WebElement webElement = findByXpath(format(widgetContainerXpath, widgetName));
+        int width = webElement.getSize().getWidth();
         log.info("widget width {}", width);
         return width;
     }
 
-    public int getWidgetHeight(){
-        int height = launchStatisticsAreaContainer.getSize().getWidth();
+    public int getWidgetHeight(String widgetName){
+        WebElement webElement = findByXpath(format(widgetContainerXpath, widgetName));
+        int height = webElement.getSize().getWidth();
         log.info("widget height {}", height);
         return height;
     }
 
-    public DashboardPageObject hoverOverWidgetHeader() {
-        new Actions(DriverManager.getDriver())
-                .moveToElement(testWidgetHeader)
+    public DashboardPageObject hoverOverWidgetHeader(String widgetName) {
+        WebElement webElement = findByXpath(format(widgetHeaderElementXpath, widgetName));
+        new Actions(driver)
+                .moveToElement(webElement)
                 .build()
                 .perform();
         return this;
     }
 
-    public DashboardPageObject clickEditWidgetButton() {
-        testWidgetEditButton.click();
+    public DashboardPageObject clickEditWidgetButton(String widgetName) {
+        WebElement webElement = findByXpath(format(widgetEditButtonXpath, widgetName));
+        webElement.click();
         return this;
     }
 
     public DashboardPageObject selectAvailableWidgetType() {
-        firstAvailableWidgetTypeRadioButton.click();
+        findByXpath(firstAvailableWidgetTypeRadioButtonXpath)
+                .click();
         return this;
     }
 
     public DashboardPageObject clickNextStep() {
-        nextStepButton.click();
+        findByXpath(nextStepButtonXpath)
+                .click();
         return this;
     }
 
     public DashboardPageObject selectDemoFilter() {
-        demoFilterRadioButton.click();
+        findByXpath(demoFilterRadioButtonXpath)
+                .click();
         return this;
     }
 
     public DashboardPageObject setWidgetNameToInput(String widgetName) {
-        editWidgetNameInput.clear();
-        editWidgetNameInput.sendKeys(widgetName);
+        WebElement webElement = findByXpath(editWidgetNameInputXpath);
+        webElement.clear();
+        webElement.sendKeys(widgetName);
         return this;
     }
 
     public DashboardPageObject clickAddButton() {
-        addButton.click();
+        findByXpath(addButtonXpath)
+                .click();
         return this;
     }
 
-    public DashboardPageObject clickDeleteTestWidgetButton() {
-        testWidgetDeleteButton.click();
+    public DashboardPageObject clickDeleteWidgetButton(String widgetName) {
+        findByXpath(format(deleteWidgetButtonXpath, widgetName))
+                .click();
         return this;
     }
 
     public DashboardPageObject verifyDeleteWidgetWindowIsOpen() {
-        waitUntilElementAppears(deleteWidgetModalWindow);
+        waitUntilElementAppears(findByXpath(deleteWidgetModalWindowXpath));
         return this;
     }
 
     public DashboardPageObject clickConfirmToDeleteWidgetButton() {
-        confirmToDeleteWidgetButton.click();
+        findByXpath(confirmationDeleteWidgetButtonXpath)
+                .click();
         return this;
     }
 
-    public DashboardPageObject clickDeleteButtonForSpecifiedWidget(String widgetName) {
-        String xpath = String.format(
-                "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[3]",
-                widgetName);
-        WebElement deleteButton = DriverManager.getDriver().findElement(By.xpath(xpath));
-        deleteButton.click();
-        return this;
-    }
-
-    public DashboardPageObject hoverOverSpecifiedWidgetHeader(String widgetName) {
-        String xpath = String.format(
-                "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__info-block')]",
-                widgetName);
-        WebElement widgetHeader = DriverManager.getDriver().findElement(By.xpath(xpath));
-        new Actions(DriverManager.getDriver())
-                .moveToElement(widgetHeader)
-                .build()
-                .perform();
-        return this;
-    }
-
-    public DashboardPageObject hoverOverPassedDemoLaunch() {
-        new Actions(DriverManager.getDriver())
-                .moveToElement(passedDemoLaunch)
+    public DashboardPageObject hoverOverPassedDemoLaunch(String widgetName) {
+        WebElement webElement = findByXpath(format(fullyPassedDemoLaunchFromWidget, widgetName));
+        new Actions(driver)
+                .moveToElement(webElement)
                 .click()
                 .build()
                 .perform();

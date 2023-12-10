@@ -31,19 +31,20 @@ public class DashboardBusinessObject {
     }
 
     @Step
-    public void goToEditWidgetModalWindow() {
+    public void goToEditWidgetModalWindow(String widgetName) {
         dashboardPage
                 .openDashboardPage()
-                .hoverOverWidgetHeader()
-                .clickEditWidgetButton()
+                .hoverOverWidgetHeader(widgetName)
+                .clickEditWidgetButton(widgetName)
                 .verifyEditWidgetWindowIsOpen();
     }
 
     @Step
     public void deleteWidgetFromDashboard(String widgetName) {
         dashboardPage
-                .hoverOverSpecifiedWidgetHeader(widgetName)
-                .clickDeleteButtonForSpecifiedWidget(widgetName)
+                .openDashboardPage()
+                .hoverOverWidgetHeader(widgetName)
+                .clickDeleteWidgetButton(widgetName)
                 .verifyDeleteWidgetWindowIsOpen()
                 .clickConfirmToDeleteWidgetButton();
         log.info("Widget with name '{}' was deleted from dashboard", widgetName);

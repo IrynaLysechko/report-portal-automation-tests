@@ -2,143 +2,114 @@ package com.epam.report.portal.ui.pages;
 
 import com.epam.report.portal.factory.driver.DriverManager;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import static com.epam.report.portal.utils.Waits.waitUntilElementAppears;
 
 @Slf4j
 public class WidgetPageObject extends AbstractPage {
 
-    @FindBy(xpath = "//div[contains(@class, 'edit-widget-modal')]")
-    private WebElement editWidgetWindow;
+    private String widgetNameInputXpath = "//input[@placeholder='Enter widget name']";
+    private String widgetDescriptionInputXpath =  "//textarea[@placeholder='Enter widget description']";
+    private String saveButtonXpath = "//button[text()='Save']";
+    private String widgetCountInputXpath = "(//input[contains(@class,'type-text variant-standard')])[1]";
+    private String widgetViewButtonXpath = "//span[text()='%s']";
 
-    @FindBy(xpath = "//input[@placeholder='Enter widget name']")
-    private WebElement editWidgetNameInput;
+    private String filterEditButtonXpath = "//span[contains(@class, 'pencil-icon')]";
+    private String filterItemXpath = "//span[text()='%s']/ancestor::div[contains(@class, 'filtersItem')]";
+    private String filterRadioButtonXpath = "//span[text()='%s']/ancestor::span[contains(@class, 'inputRadio')]";
+    private String editFilterButtonXpath = "//span[text()='%s']/ancestor::span[contains(@class, 'inputRadio')]//span[contains(@class, 'pencil')]";
+    private String filterEntitiesSelectorXpath = "//div[contains(@class, 'entitiesSelector__toggler')]";
+    private String entityValueInputXpath = "//input[@placeholder='Enter quantity']";
+    private String entityValue = "//span[text()='%s']";
 
-    @FindBy(xpath = "//textarea[@placeholder='Enter widget description']")
-    private WebElement editWidgetDescriptionInput;
-
-    @FindBy(xpath = "//button[text()='Save']")
-    private WebElement saveButton;
-
-    @FindBy(xpath = "(//input[contains(@class,'type-text variant-standard')])[1]")
-    private WebElement editWidgetCountInput;
-
-    @FindBy(xpath = "//span[text()='Bar view']")
-    private WebElement barViewButton;
-
-    @FindBy(xpath = "//span[contains(@class, 'pencil-icon')]")
-    private WebElement editWidgetFilterButton;
-
-    @FindBy(xpath = "//span[text()='my filter']/ancestor::div[contains(@class, 'filtersItem')]")
-    private WebElement filterItem;
-
-    @FindBy(xpath = "//span[text()='my filter']/ancestor::span[contains(@class, 'inputRadio')]")
-    private WebElement filterRadioButton;
-
-    @FindBy(xpath = "//span[text()='my filter']/ancestor::span[contains(@class, 'inputRadio')]//span[contains(@class, 'pencil')]")
-    private WebElement filterEditButton;
-
-    @FindBy(xpath = "//div[contains(@class, 'entitiesSelector__toggler')]")
-    private WebElement filterSelector;
-
-    @FindBy(xpath = "//button[text()='Submit']")
-    private WebElement submitButton;
-
-    @FindBy(xpath = "//input[@placeholder='Enter quantity']")
-    private WebElement attributeValueInput;
-
-    @FindBy(xpath = "//div[contains(@class, 'close-modal-icon')]")
-    private WebElement closeModalWindowButton;
-
-    public WidgetPageObject verifyEditWidgetWindowIsOpen() {
-        waitUntilElementAppears(editWidgetWindow);
-        return this;
-    }
+    private String submitButtonXpath = "//button[text()='Submit']";
+    private String closeModalWindowIconXpath = "//div[contains(@class, 'close-modal-icon')]";
 
     public WidgetPageObject setWidgetNameToInput(String widgetName) {
-        editWidgetNameInput.clear();
-        editWidgetNameInput.sendKeys(widgetName);
+        WebElement webElement = findByXpath(widgetNameInputXpath);
+        webElement.clear();
+        webElement.sendKeys(widgetName);
         return this;
     }
 
     public WidgetPageObject setWidgetDescriptionToInput(String widgetDescription) {
-        editWidgetDescriptionInput.clear();
-        editWidgetDescriptionInput.sendKeys(widgetDescription);
+        WebElement webElement = findByXpath(widgetDescriptionInputXpath);
+        webElement.clear();
+        webElement.sendKeys(widgetDescription);
         return this;
     }
 
     public WidgetPageObject setWidgetItemsCountToInput(String widgetItemsCount) {
-        editWidgetCountInput.clear();
-        editWidgetCountInput.sendKeys(widgetItemsCount);
+        WebElement webElement = findByXpath(widgetCountInputXpath);
+        webElement.clear();
+        webElement.sendKeys(widgetItemsCount);
         return this;
     }
 
     public WidgetPageObject clickSaveButton() {
-        saveButton.click();
+        findByXpath(saveButtonXpath).click();
         return this;
     }
 
-    public WidgetPageObject changeWidgetView() {
-        barViewButton.click();
+    public WidgetPageObject changeWidgetView(String view) {
+        findByXpath(format(widgetViewButtonXpath, view)).click();
         return this;
     }
 
     public WidgetPageObject clickEditWidgetFilterButton() {
-        editWidgetFilterButton.click();
+        findByXpath(editFilterButtonXpath).click();
         return this;
     }
 
-    public WidgetPageObject selectTestWidgetFilter() {
-        if (!filterRadioButton.isSelected()) {
-            filterRadioButton.click();
-            log.info("selected test widget filter");
+    public WidgetPageObject selectWidgetFilter(String filterName) {
+        WebElement webElement = findByXpath(format(filterRadioButtonXpath, filterName));
+        if (!webElement.isSelected()) {
+            webElement.click();
+            log.info("selected filter with name {}", filterName);
         }
         return this;
     }
 
-    public WidgetPageObject hoverOverTestFilter() {
+    public WidgetPageObject hoverOverWidgetFilter(String filterName) {
         new Actions(DriverManager.getDriver())
-                .moveToElement(filterItem)
+                .moveToElement(findByXpath(format(filterItemXpath, filterName)))
                 .build()
                 .perform();
         return this;
     }
 
-    public WidgetPageObject clickEditTestFilterButton() {
-        filterEditButton.click();
+    public WidgetPageObject clickEditFilterButton() {
+        findByXpath(filterEditButtonXpath)
+                .click();
         return this;
     }
 
     public WidgetPageObject clickFilterSelector() {
-        filterSelector.click();
+        findByXpath(filterEntitiesSelectorXpath)
+                .click();
         return this;
     }
 
     public WidgetPageObject selectAdditionalAttribute(String attribute) {
-        String xpath = String.format("//span[text()='%s']", "Product bug");
-        WebElement webElement = DriverManager.getDriver().findElement(By.xpath(xpath));
-        webElement.click();
+       findByXpath(format(entityValue, attribute))
+               .click();
         return this;
     }
 
     public WidgetPageObject setAttributeValueToInput(String attributeValue) {
-        attributeValueInput.clear();
-        attributeValueInput.sendKeys(attributeValue);
+        WebElement webElement = findByXpath(entityValueInputXpath);
+        webElement.clear();
+        webElement.sendKeys(attributeValue);
         return this;
     }
 
     public WidgetPageObject clickSubmitButton() {
-        submitButton.click();
+        findByXpath(submitButtonXpath).click();
         return this;
     }
 
     public WidgetPageObject clickCloseModalWindowsButton() {
-        closeModalWindowButton.click();
-        log.info("Closed modal window");
+        findByXpath(closeModalWindowIconXpath).click();
         return this;
     }
 }

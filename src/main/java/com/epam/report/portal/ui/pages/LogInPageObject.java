@@ -1,35 +1,31 @@
 package com.epam.report.portal.ui.pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-public class LogInPageObject extends AbstractPage{
+public class LogInPageObject extends AbstractPage {
 
-    @FindBy(name = "login")
-    private WebElement emailInput;
-
-    @FindBy(name = "password")
-    private WebElement passwordInput;
-
-    @FindBy(xpath = "(//button[@type='submit'])")
-    private WebElement logInButton;
+    private String emailInputName = "login";
+    private String passwordInputName = "password";
+    private String logInButtonXpath = "//button[@type='submit']";
 
     @Step
     public LogInPageObject setUserEmail(String email) {
-        emailInput.sendKeys(email);
+        findByName(emailInputName)
+                .sendKeys(email);
         return this;
     }
 
     @Step
     public LogInPageObject setUserPassword(String password) {
-        passwordInput.sendKeys(password);
+        findByName(passwordInputName)
+                .sendKeys(password);
         return this;
     }
 
     @Step
     public LogInPageObject clickLogInButton() {
-        logInButton.click();
+        findByXpath(logInButtonXpath)
+                .click();
         return this;
     }
 }

@@ -7,25 +7,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WidgetBusinessObject {
 
-    private WidgetPageObject widgetPage = new WidgetPageObject();
+    private final WidgetPageObject widgetPage = new WidgetPageObject();
 
     @Step
-    public WidgetBusinessObject addParameterToTestWidgetFilter(String parameterName, String parameterValue){
+    public WidgetBusinessObject addParameterToWidgetFilter(String filterName, String parameterName,
+                                                           String parameterValue){
         widgetPage
                 .clickEditWidgetFilterButton()
-                .selectTestWidgetFilter()
-                .hoverOverTestFilter()
-                .clickEditTestFilterButton()
+                .selectWidgetFilter(filterName)
+                .hoverOverWidgetFilter(filterName)
+                .clickEditFilterButton()
                 .clickFilterSelector()
                 .selectAdditionalAttribute(parameterName)
                 .setAttributeValueToInput(parameterValue)
                 .clickSubmitButton();
+        log.info("Added parameters {}:{} to filter with name {}", parameterName, parameterValue, parameterValue);
         return this;
     }
 
     @Step
     public void closeWidgetModalWindow() {
         widgetPage.clickCloseModalWindowsButton();
+        log.info("Closed modal window");
     }
 
     @Step
@@ -50,9 +53,9 @@ public class WidgetBusinessObject {
     }
 
     @Step
-    public void updateWidgetView() {
+    public void updateWidgetView(String widgetView) {
         widgetPage
-                .changeWidgetView()
+                .changeWidgetView(widgetView)
                 .clickSaveButton();
     }
 }
