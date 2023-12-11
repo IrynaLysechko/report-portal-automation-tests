@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Report Portal Test Suite" verbose="1">
+    <test name="Report Portal API Tests">
+        <classes>
+            <class name="com.epam.report.portal.test.api.get.WidgetGetPositiveTest"/>
+            <class name="com.epam.report.portal.test.api.get.WidgetGetNegativeTest"/>
+
+            <class name="com.epam.report.portal.test.api.delete.WidgetDeletePositiveTest"/>
+            <class name="com.epam.report.portal.test.api.delete.WidgetDeleteNegativeTest"/>
+
+            <class name="com.epam.report.portal.test.api.post.WidgetPostNegativeTest"/>
+            <class name="com.epam.report.portal.test.api.post.WidgetPostPositiveTest"/>
+
+            <class name="com.epam.report.portal.test.api.put.WidgetPutPositiveTest"/>
+            <class name="com.epam.report.portal.test.api.put.WidgetPutNegativeTest"/>
+        </classes>
+    </test>
+</suite>

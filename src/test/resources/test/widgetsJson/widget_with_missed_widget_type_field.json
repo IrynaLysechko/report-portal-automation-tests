@@ -1,0 +1,60 @@
+{
+  "contentParameters": {
+    "contentFields": [
+      "name",
+      "user",
+      "lastModified",
+      "actionType",
+      "objectType",
+      "projectRef",
+      "loggedObjectRef",
+      "history"
+    ],
+    "itemsCount": "50",
+    "widgetOptions": {
+      "actionType": [
+        "startLaunch",
+        "finishLaunch",
+        "deleteLaunch",
+        "postIssue",
+        "linkIssue",
+        "unlinkIssue",
+        "assignUser",
+        "unassignUser",
+        "changeRole",
+        "createDashboard",
+        "updateDashboard",
+        "deleteDashboard",
+        "createWidget",
+        "updateWidget",
+        "deleteWidget",
+        "createFilter",
+        "updateFilter",
+        "deleteFilter",
+        "createIntegration",
+        "updateIntegration",
+        "deleteIntegration",
+        "updateProject",
+        "updateAnalyzer",
+        "generateIndex",
+        "deleteIndex",
+        "createDefect",
+        "updateDefect",
+        "deleteDefect",
+        "startImport",
+        "finishImport",
+        "updatePatternAnalysisSettings",
+        "createPattern",
+        "updatePattern",
+        "deletePattern",
+        "patternMatched",
+        "createProject"
+      ],
+      "user": ""
+    }
+  },
+  "filters": [],
+  "name": "Project activity panel_520",
+  "description": "",
+  "filterIds": []
+}

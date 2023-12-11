@@ -20,6 +20,7 @@ public class AllureAttachment implements ReportAttachment {
                 ImmutableMap.<String, String>builder()
                         .put("App name", AppConfiguration.getAppName())
                         .put("ReportPortal url", AppConfiguration.getReportPortalUrl())
+                        .put("ReportPortal project name", AppConfiguration.getReportPortalProjectName())
                         .build(), System.getProperty("user.dir")
                         + "/build/allure-results/");
     }

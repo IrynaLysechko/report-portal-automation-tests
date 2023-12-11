@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 
 import static com.epam.report.portal.factory.data.WidgetPreviewDataFactory.*;
-import static com.epam.report.portal.utils.Constants.BASE_RESOURCES_PATH;
+import static com.epam.report.portal.test.Constants.BASE_RESOURCES_PATH;
 
 public class WidgetDataProvider {
 

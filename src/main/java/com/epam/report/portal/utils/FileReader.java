@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public class FileReader {
 
     @Step
-    public String readFileFromTestResourcesToString(String filePath) throws IOException {
+    public static String readFileFromTestResourcesToString(String filePath) throws IOException {
         return new String(Files.readAllBytes(Paths.get("./src/test/resources/" + filePath)));
     }
 

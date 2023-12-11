@@ -78,4 +78,8 @@ public class AppConfiguration {
     public static String getBearerToken() {
         return getProperties("bearer.token");
     }
+
+    public static int getProjectDashboardId() {
+        return Integer.parseInt(getProperties("reportPortal.project.dashboard.id"));
+    }
 }
