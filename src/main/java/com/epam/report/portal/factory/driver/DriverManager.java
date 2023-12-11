@@ -14,7 +14,7 @@ public class DriverManager {
     public static WebDriver getDriver() {
         if (WEBDRIVER_POOL.get() == null) {
             log.info("set driver to poll");
-            WEBDRIVER_POOL.set(DriverFactory.createDriver("chrome"));
+            WEBDRIVER_POOL.set(DriverFactory.createDriver(System.getProperty("browser")));
         }
         return WEBDRIVER_POOL.get();
     }

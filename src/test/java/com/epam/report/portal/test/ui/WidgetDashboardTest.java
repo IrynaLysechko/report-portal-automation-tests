@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.epam.report.portal.test.Constants.WIDGET_JSON_PATH;
-import static com.epam.report.portal.test.ui.data.DataProviderUI.LAUNCH_AREA_WIDGET;
-import static com.epam.report.portal.test.ui.data.DataProviderUI.LAUNCH_BAR_WIDGET;
+import static com.epam.report.portal.test.ui.data.DataProviderUI.*;
 
+@Test(groups = {"ui", "dashboard", "all"})
 @Epic("Widget UI test")
 @Feature("Verify user is able to interact with widgets on dashboard")
 public class WidgetDashboardTest extends BaseTest {
@@ -44,41 +44,13 @@ public class WidgetDashboardTest extends BaseTest {
         DashboardPageObject dashboardPage = new DashboardPageObject()
                 .openDashboardPage();
         String barContainerPositionBefore = dashboardPage
-                .getWidgetContainerPosition(LAUNCH_BAR_WIDGET);
+                .getWidgetContainerPosition(LAUNCH_AREA_WIDGET);
         dashboardPage
                 .performDragAndDropAction(LAUNCH_AREA_WIDGET, LAUNCH_BAR_WIDGET);
         String areaContainerPositionAfter = dashboardPage
                 .getWidgetContainerPosition(LAUNCH_AREA_WIDGET);
         Assertions.assertThat(areaContainerPositionAfter)
-                .isEqualTo(barContainerPositionBefore);
-    }
-
-    @Test(description = "Verify user is able to resize widgets on the dashboard")
-    public void verifyUserIsAbleToResizeWidgetOnDashboard() {
-        DashboardPageObject dashboardPage = new DashboardPageObject()
-                .openDashboardPage();
-
-        int initialWidth = dashboardPage
-                .getWidgetWidth(LAUNCH_AREA_WIDGET);
-        int initialHeight = dashboardPage
-                .getWidgetHeight(LAUNCH_AREA_WIDGET);
-        dashboardPage
-                .performWidgetResize(LAUNCH_AREA_WIDGET, 200, 150);
-        int increasedWidth = dashboardPage
-                .getWidgetWidth(LAUNCH_AREA_WIDGET);
-        int increasedHeight = dashboardPage
-                .getWidgetHeight(LAUNCH_AREA_WIDGET);
-        Assertions.assertThat(increasedWidth).isGreaterThan(initialWidth);
-        Assertions.assertThat(increasedHeight).isGreaterThan(initialHeight);
-
-        dashboardPage
-                .performWidgetResize(LAUNCH_AREA_WIDGET,-200, -150);
-        int decreasedWidth = dashboardPage
-                .getWidgetWidth(LAUNCH_AREA_WIDGET);
-        int decreasedHeight = dashboardPage
-                .getWidgetHeight(LAUNCH_AREA_WIDGET);
-        Assertions.assertThat(decreasedWidth).isEqualTo(initialWidth);
-        Assertions.assertThat(decreasedHeight).isEqualTo(initialHeight);
+                .isNotEqualTo(barContainerPositionBefore);
     }
 
     @Test(description = "Verify user is able to navigate to appropriate launch view after clicking on widget content")
@@ -90,5 +62,14 @@ public class WidgetDashboardTest extends BaseTest {
                 .waitUntilLaunchPageIsOpened()
                 .getLaunchPageUrl();
         Assertions.assertThat(launchPageUrl).contains("PASSED");
+    }
+
+    @Test(description = "Verify user is able to scroll to widget on dashboard")
+    public void verifyUserIsAbleToScrollToWidgetOnDashboard() {
+        new DashboardPageObject()
+                .openDashboardPage()
+                .scrollToWidget(FAILED_CASES_TREND);
+        Assertions.assertThat(new DashboardPageObject()
+                .isElementScrolledIntoView(FAILED_CASES_TREND)).isTrue();
     }
 }

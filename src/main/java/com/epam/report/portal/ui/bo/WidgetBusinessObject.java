@@ -58,4 +58,18 @@ public class WidgetBusinessObject {
                 .changeWidgetView(widgetView)
                 .clickSaveButton();
     }
+
+    @Step
+    public String getWidgetItemCount() {
+        return widgetPage
+                .getWidgetItemCount();
+    }
+
+    @Step
+    public String getInfoAboutFilter(String filterName) {
+        String filterInfo =  widgetPage
+                .getFilterInfo(filterName);
+        log.info("Filter '{}' info: {}", filterName, filterInfo);
+        return filterInfo;
+    }
 }

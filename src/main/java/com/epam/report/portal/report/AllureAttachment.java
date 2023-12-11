@@ -16,6 +16,7 @@ public class AllureAttachment implements ReportAttachment {
     @Override
     @Attachment(value = "Failed test screenshot", type = "image/png")
     public byte[] attachScreenShootToReport() {
+        log.info("attach screen shoot");
         return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 

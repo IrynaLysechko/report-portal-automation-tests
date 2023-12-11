@@ -1,6 +1,6 @@
 package com.epam.report.portal.ui.pages;
 
-import com.epam.report.portal.factory.driver.DriverManager;
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,10 +14,11 @@ public class WidgetPageObject extends AbstractPage {
     private String widgetCountInputXpath = "(//input[contains(@class,'type-text variant-standard')])[1]";
     private String widgetViewButtonXpath = "//span[text()='%s']";
 
-    private String filterEditButtonXpath = "//span[contains(@class, 'pencil-icon')]";
+    private String widgetFiltersEditButtonXpath = "//span[contains(@class, 'pencil-icon')]";
     private String filterItemXpath = "//span[text()='%s']/ancestor::div[contains(@class, 'filtersItem')]";
-    private String filterRadioButtonXpath = "//span[text()='%s']/ancestor::span[contains(@class, 'inputRadio')]";
-    private String editFilterButtonXpath = "//span[text()='%s']/ancestor::span[contains(@class, 'inputRadio')]//span[contains(@class, 'pencil')]";
+    private String filterRadioButtonXpath = "//span[text()='%s']//ancestor::span[contains(@class, 'inputRadio')]";
+    private String filterInfoXpath = "//span[text()='%s']/ancestor::span[contains(@class, 'inputRadio')]//p";
+    private String editFilterButtonXpath = "//span[contains(@class, 'pencil')]";
     private String filterEntitiesSelectorXpath = "//div[contains(@class, 'entitiesSelector__toggler')]";
     private String entityValueInputXpath = "//input[@placeholder='Enter quantity']";
     private String entityValue = "//span[text()='%s']";
@@ -25,42 +26,48 @@ public class WidgetPageObject extends AbstractPage {
     private String submitButtonXpath = "//button[text()='Submit']";
     private String closeModalWindowIconXpath = "//div[contains(@class, 'close-modal-icon')]";
 
+    @Step
     public WidgetPageObject setWidgetNameToInput(String widgetName) {
-        WebElement webElement = findByXpath(widgetNameInputXpath);
-        webElement.clear();
-        webElement.sendKeys(widgetName);
+        clearAndSendKeys(findByXpath(widgetNameInputXpath), widgetName);
         return this;
     }
 
+    @Step
     public WidgetPageObject setWidgetDescriptionToInput(String widgetDescription) {
-        WebElement webElement = findByXpath(widgetDescriptionInputXpath);
-        webElement.clear();
-        webElement.sendKeys(widgetDescription);
+        clearAndSendKeys(findByXpath(widgetDescriptionInputXpath), widgetDescription);
         return this;
     }
 
+    @Step
     public WidgetPageObject setWidgetItemsCountToInput(String widgetItemsCount) {
-        WebElement webElement = findByXpath(widgetCountInputXpath);
-        webElement.clear();
-        webElement.sendKeys(widgetItemsCount);
+        clearAndSendKeys(findByXpath(widgetCountInputXpath), widgetItemsCount);
         return this;
     }
 
+    @Step
+    public String getWidgetItemCount() {
+        return getAttribute(widgetCountInputXpath, "value");
+    }
+
+    @Step
     public WidgetPageObject clickSaveButton() {
-        findByXpath(saveButtonXpath).click();
+        click(saveButtonXpath);
         return this;
     }
 
+    @Step
     public WidgetPageObject changeWidgetView(String view) {
-        findByXpath(format(widgetViewButtonXpath, view)).click();
+        click(format(widgetViewButtonXpath, view));
         return this;
     }
 
+    @Step
     public WidgetPageObject clickEditWidgetFilterButton() {
-        findByXpath(editFilterButtonXpath).click();
+        click(editFilterButtonXpath);
         return this;
     }
 
+    @Step
     public WidgetPageObject selectWidgetFilter(String filterName) {
         WebElement webElement = findByXpath(format(filterRadioButtonXpath, filterName));
         if (!webElement.isSelected()) {
@@ -70,46 +77,53 @@ public class WidgetPageObject extends AbstractPage {
         return this;
     }
 
+    @Step
+    public String getFilterInfo(String filterName) {
+        return getText(format(filterInfoXpath, filterName));
+    }
+
+    @Step
     public WidgetPageObject hoverOverWidgetFilter(String filterName) {
-        new Actions(DriverManager.getDriver())
+        new Actions(driver)
                 .moveToElement(findByXpath(format(filterItemXpath, filterName)))
                 .build()
                 .perform();
         return this;
     }
 
+    @Step
     public WidgetPageObject clickEditFilterButton() {
-        findByXpath(filterEditButtonXpath)
-                .click();
+        click(widgetFiltersEditButtonXpath);
         return this;
     }
 
+    @Step
     public WidgetPageObject clickFilterSelector() {
-        findByXpath(filterEntitiesSelectorXpath)
-                .click();
+        click(filterEntitiesSelectorXpath);
         return this;
     }
 
+    @Step
     public WidgetPageObject selectAdditionalAttribute(String attribute) {
-       findByXpath(format(entityValue, attribute))
-               .click();
+       click(format(entityValue, attribute));
         return this;
     }
 
+    @Step
     public WidgetPageObject setAttributeValueToInput(String attributeValue) {
-        WebElement webElement = findByXpath(entityValueInputXpath);
-        webElement.clear();
-        webElement.sendKeys(attributeValue);
+        clearAndSendKeys(findByXpath(entityValueInputXpath), attributeValue);
         return this;
     }
 
+    @Step
     public WidgetPageObject clickSubmitButton() {
-        findByXpath(submitButtonXpath).click();
+        click(submitButtonXpath);
         return this;
     }
 
+    @Step
     public WidgetPageObject clickCloseModalWindowsButton() {
-        findByXpath(closeModalWindowIconXpath).click();
+        click(closeModalWindowIconXpath);
         return this;
     }
 }

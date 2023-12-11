@@ -4,6 +4,8 @@ import com.epam.report.portal.ui.pages.DashboardPageObject;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public class DashboardBusinessObject {
 
@@ -36,7 +38,7 @@ public class DashboardBusinessObject {
                 .openDashboardPage()
                 .hoverOverWidgetHeader(widgetName)
                 .clickEditWidgetButton(widgetName)
-                .verifyEditWidgetWindowIsOpen();
+                .waitForEditWidgetWindowOpening();
     }
 
     @Step
@@ -49,4 +51,24 @@ public class DashboardBusinessObject {
                 .clickConfirmToDeleteWidgetButton();
         log.info("Widget with name '{}' was deleted from dashboard", widgetName);
     }
-}
+
+    @Step
+    public List<String> getExistingWidgetsNamesOnDashboard() {
+        List<String> widgetNames = dashboardPage
+                .getWidgetsName();
+        log.info("Existing widgets on dashboard {}", widgetNames);
+        return widgetNames;
+    }
+
+    @Step
+    public String getWidgetDescriptionOnDashboard(String widgetName) {
+        return dashboardPage
+                .getWidgetDescription(widgetName);
+    }
+
+    @Step
+    public String getWidgetViewOnDashboard(String widgetName) {
+        return dashboardPage
+                .getWidgetViewName(widgetName);
+    }
+ }

@@ -24,8 +24,7 @@ public class LogInPageObject extends AbstractPage {
 
     @Step
     public LogInPageObject clickLogInButton() {
-        findByXpath(logInButtonXpath)
-                .click();
+        click(logInButtonXpath);
         return this;
     }
 }

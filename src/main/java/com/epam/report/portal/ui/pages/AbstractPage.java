@@ -38,4 +38,20 @@ public class AbstractPage {
         return String.format(format, arguments);
     }
 
+    public void clearAndSendKeys(WebElement webElement, String ... keys) {
+        webElement.clear();
+        webElement.sendKeys(keys);
+    }
+
+    public String getText(String xpath) {
+        return findByXpath(xpath).getText();
+    }
+
+    public String getAttribute(String xpath, String attribute) {
+        return findByXpath(xpath).getAttribute(attribute);
+    }
+
+    public void click(String xpath) {
+        findByXpath(xpath).click();
+    }
 }
