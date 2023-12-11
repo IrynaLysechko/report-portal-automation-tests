@@ -27,32 +27,29 @@ public class WidgetEditTest extends BaseTest {
 
     @BeforeMethod
     public void createTestWidget() {
-        testWidgetName = "TEST_WIDGET_" + RandomStringUtils.randomAlphanumeric(4);
-        new DashboardBusinessObject()
+        testWidgetName = "TEST_WIDGET_" + RandomStringUtils.randomNumeric(4);
+        dashboardBusinessObject
                 .createTestWidgetOnDashboard(testWidgetName);
     }
 
-    @Test(description = "Verify user is able to add new entities to widget filter")
+    @Test(description = "Verify user is able to widget filter")
     public void verifyUserIsAbleToEditWidgetFilter() {
-        String additionalParameterName = "Product bug";
-        String additionalParameterValue = "2;";
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .goToEditWidgetModalWindow(testWidgetName);
-        String displayedFilterInfo = new WidgetBusinessObject()
-                .addParameterToWidgetFilter(TEST_FILTER, additionalParameterName, additionalParameterValue)
-                .getInfoAboutFilter(TEST_FILTER);
-        new WidgetBusinessObject()
+        String displayedWidgetFilterName = new WidgetBusinessObject()
+                .changeWidgetFilter(TEST_FILTER)
+                .getWidgetFilterName();
+        widgetBusinessObject
                 .closeWidgetModalWindow();
-        Assertions.assertThat(displayedFilterInfo).contains(additionalParameterName, additionalParameterValue);
+        Assertions.assertThat(displayedWidgetFilterName).isEqualTo(TEST_FILTER);
     }
 
     @Test(description = "Verify user is able to change widget name")
     public void verifyUserIsAbleToChangeWidgetName() {
-        updatedWidgetName = "Test widget update " + RandomStringUtils.randomAlphanumeric(4);
-        DashboardBusinessObject dashboardBusinessObject = new DashboardBusinessObject();
+        updatedWidgetName = "Test widget update " + RandomStringUtils.randomNumeric(4);
         dashboardBusinessObject
                 .goToEditWidgetModalWindow(testWidgetName);
-        new WidgetBusinessObject()
+        widgetBusinessObject
                 .updateWidgetName(updatedWidgetName);
         List<String> existingWidgetNames = dashboardBusinessObject
                 .getExistingWidgetsNamesOnDashboard();
@@ -61,9 +58,9 @@ public class WidgetEditTest extends BaseTest {
 
     @Test(description = "Verify user is able to change widget description")
     public void verifyUserIsAbleToChangeWidgetDescription() {
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .goToEditWidgetModalWindow(testWidgetName);
-        new WidgetBusinessObject()
+        widgetBusinessObject
                 .updateWidgetDescription(TEST_WIDGET_DESCRIPTION);
         String description = new DashboardBusinessObject()
                 .getWidgetDescriptionOnDashboard(testWidgetName);
@@ -73,24 +70,24 @@ public class WidgetEditTest extends BaseTest {
     @Test(description = "Verify user is able to change widget items count")
     public void verifyUserIsAbleToChangeWidgetItemsCount() {
         String itemCountToSet = "20";
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .goToEditWidgetModalWindow(testWidgetName);
-        new WidgetBusinessObject()
+        widgetBusinessObject
                 .updateWidgetItemCount(itemCountToSet);
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .goToEditWidgetModalWindow(testWidgetName);
         String widgetItemCount = new WidgetBusinessObject()
                 .getWidgetItemCount();
-        new WidgetBusinessObject()
+        widgetBusinessObject
                 .closeWidgetModalWindow();
         Assertions.assertThat(widgetItemCount).isEqualTo(itemCountToSet);
     }
 
     @Test(description = "Verify user is able to change widget view type")
     public void verifyUserIsAbleToChangeWidgetViewType() {
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .goToEditWidgetModalWindow(testWidgetName);
-        new WidgetBusinessObject()
+        widgetBusinessObject
                 .updateWidgetView(WIDGET_BAR_VIEW);
         String widgetView = new DashboardBusinessObject()
                 .getWidgetViewOnDashboard(testWidgetName);
@@ -143,7 +140,7 @@ public class WidgetEditTest extends BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void deleteTestWidget() {
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .deleteWidgetFromDashboard(Objects.requireNonNullElse(updatedWidgetName, testWidgetName));
     }
 }

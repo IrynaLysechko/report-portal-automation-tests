@@ -16,12 +16,14 @@ public class WidgetPageObject extends AbstractPage {
 
     private String widgetFiltersEditButtonXpath = "//span[contains(@class, 'pencil-icon')]";
     private String filterItemXpath = "//span[text()='%s']/ancestor::div[contains(@class, 'filtersItem')]";
+    private String widgetFilterNameXpath = "//span[contains(@class, 'filterName__bold')]";
     private String filterRadioButtonXpath = "//span[text()='%s']//ancestor::span[contains(@class, 'inputRadio')]";
     private String filterInfoXpath = "//span[text()='%s']/ancestor::span[contains(@class, 'inputRadio')]//p";
     private String editFilterButtonXpath = "//span[contains(@class, 'pencil')]";
     private String filterEntitiesSelectorXpath = "//div[contains(@class, 'entitiesSelector__toggler')]";
     private String entityValueInputXpath = "//input[@placeholder='Enter quantity']";
     private String entityValue = "//span[text()='%s']";
+
 
     private String submitButtonXpath = "//button[text()='Submit']";
     private String closeModalWindowIconXpath = "//div[contains(@class, 'close-modal-icon')]";
@@ -75,6 +77,11 @@ public class WidgetPageObject extends AbstractPage {
             log.info("selected filter with name {}", filterName);
         }
         return this;
+    }
+
+    @Step
+    public String getWidgetFilterName() {
+        return findByXpath(widgetFilterNameXpath).getText();
     }
 
     @Step

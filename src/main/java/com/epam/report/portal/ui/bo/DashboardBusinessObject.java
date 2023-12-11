@@ -3,6 +3,7 @@ package com.epam.report.portal.ui.bo;
 import com.epam.report.portal.ui.pages.DashboardPageObject;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 
@@ -71,4 +72,40 @@ public class DashboardBusinessObject {
         return dashboardPage
                 .getWidgetViewName(widgetName);
     }
- }
+
+    @Step
+    public String getWidgetContainerPosition(String widgetName) {
+        String styleAttribute = dashboardPage.getWidgetStyleAttribute(widgetName);
+        log.info("style {}", styleAttribute);
+
+        String position = "";
+        if (StringUtils.isNotBlank(styleAttribute) && styleAttribute.contains("translate")) {
+            position = StringUtils.strip(StringUtils
+                    .substringBetween(styleAttribute, "translate(", ")"));
+        }
+
+        log.info("position is {}", position);
+        return StringUtils.isNotBlank(position) ? position : null;
+    }
+
+    @Step
+    public void moveWidgetOnDashboard(String from, String to) {
+        dashboardPage
+                .performDragAndDropAction(from, to);
+    }
+
+    @Step
+    public void goToPassedDemoLaunch(String widgetName) {
+        dashboardPage
+                .openDashboardPage()
+                .hoverOverPassedDemoLaunch(widgetName);
+    }
+
+    @Step
+    public boolean scrollToWidgetOnDashboard(String widgetName) {
+        return dashboardPage
+                .openDashboardPage()
+                .scrollToWidget(widgetName)
+                .isElementScrolledIntoView(widgetName);
+    }
+}

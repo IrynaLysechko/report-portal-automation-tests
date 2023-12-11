@@ -1,9 +1,7 @@
 package com.epam.report.portal.test.ui;
 
 import com.epam.report.portal.entity.WidgetTypesContainer;
-import com.epam.report.portal.ui.bo.DashboardBusinessObject;
 import com.epam.report.portal.ui.pages.AddNewWidgetPageObject;
-import com.epam.report.portal.ui.pages.DashboardPageObject;
 import com.epam.report.portal.ui.pages.LaunchPageObject;
 import com.epam.report.portal.utils.FileReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +29,7 @@ public class WidgetDashboardTest extends BaseTest {
         WidgetTypesContainer container = new ObjectMapper()
                 .readValue(widgetTypesJson, WidgetTypesContainer.class);
         List<String> expectedWidgetTypes = container.getWidgetTypes();
-        new DashboardBusinessObject()
+        dashboardBusinessObject
                 .goToAddNewWidgetModalWindow();
         List<String> availableWidgetTypes = new AddNewWidgetPageObject()
                 .getAvailableWidgetTypesList();
@@ -41,13 +39,11 @@ public class WidgetDashboardTest extends BaseTest {
 
     @Test(description = "User is able to move widgets on the dashboard")
     public void verifyUserIsAbleToMoveWidgetsOnTheDashboard() {
-        DashboardPageObject dashboardPage = new DashboardPageObject()
-                .openDashboardPage();
-        String barContainerPositionBefore = dashboardPage
+        String barContainerPositionBefore = dashboardBusinessObject
                 .getWidgetContainerPosition(LAUNCH_AREA_WIDGET);
-        dashboardPage
-                .performDragAndDropAction(LAUNCH_AREA_WIDGET, LAUNCH_BAR_WIDGET);
-        String areaContainerPositionAfter = dashboardPage
+        dashboardBusinessObject
+                .moveWidgetOnDashboard(LAUNCH_AREA_WIDGET, LAUNCH_BAR_WIDGET);
+        String areaContainerPositionAfter = dashboardBusinessObject
                 .getWidgetContainerPosition(LAUNCH_AREA_WIDGET);
         Assertions.assertThat(areaContainerPositionAfter)
                 .isNotEqualTo(barContainerPositionBefore);
@@ -55,9 +51,8 @@ public class WidgetDashboardTest extends BaseTest {
 
     @Test(description = "Verify user is able to navigate to appropriate launch view after clicking on widget content")
     public void verifyUserIsAbleToNavigateToWidgetLaunchView() {
-        new DashboardPageObject()
-                .openDashboardPage()
-                .hoverOverPassedDemoLaunch(LAUNCH_BAR_WIDGET);
+        dashboardBusinessObject
+                .goToPassedDemoLaunch(LAUNCH_BAR_WIDGET);
         String launchPageUrl = new LaunchPageObject()
                 .waitUntilLaunchPageIsOpened()
                 .getLaunchPageUrl();
@@ -66,10 +61,8 @@ public class WidgetDashboardTest extends BaseTest {
 
     @Test(description = "Verify user is able to scroll to widget on dashboard")
     public void verifyUserIsAbleToScrollToWidgetOnDashboard() {
-        new DashboardPageObject()
-                .openDashboardPage()
-                .scrollToWidget(FAILED_CASES_TREND);
-        Assertions.assertThat(new DashboardPageObject()
-                .isElementScrolledIntoView(FAILED_CASES_TREND)).isTrue();
+        boolean isScrolled = dashboardBusinessObject
+                .scrollToWidgetOnDashboard(FAILED_CASES_TREND);
+        Assertions.assertThat(isScrolled).isTrue();
     }
 }

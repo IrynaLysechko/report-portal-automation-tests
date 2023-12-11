@@ -2,7 +2,6 @@ package com.epam.report.portal.ui.pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -85,18 +84,8 @@ public class DashboardPageObject extends AbstractPage {
     }
 
     @Step
-    public String getWidgetContainerPosition(String widgetName) {
-        String styleAttribute = getAttribute(format(widgetContainerXpath, widgetName), "style");
-        log.info("style {}", styleAttribute);
-
-        String position = "";
-        if (StringUtils.isNotBlank(styleAttribute) && styleAttribute.contains("translate")) {
-            position = StringUtils.strip(StringUtils
-                    .substringBetween(styleAttribute, "translate(", ")"));
-        }
-
-        log.info("position is {}", position);
-        return StringUtils.isNotBlank(position) ? position : null;
+    public String getWidgetStyleAttribute(String widgetName) {
+        return getAttribute(format(widgetContainerXpath, widgetName), "style");
     }
 
     @Step
@@ -202,10 +191,11 @@ public class DashboardPageObject extends AbstractPage {
     }
 
     @Step
-    public void scrollToWidget(String widgetName) {
+    public DashboardPageObject scrollToWidget(String widgetName) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);",
                 findByXpath(format(widgetHeaderElementXpath, widgetName)));
+        return this;
     }
 
     @Step

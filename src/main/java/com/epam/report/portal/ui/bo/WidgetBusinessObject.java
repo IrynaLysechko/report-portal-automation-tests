@@ -10,19 +10,19 @@ public class WidgetBusinessObject {
     private final WidgetPageObject widgetPage = new WidgetPageObject();
 
     @Step
-    public WidgetBusinessObject addParameterToWidgetFilter(String filterName, String parameterName,
-                                                           String parameterValue){
+    public WidgetBusinessObject changeWidgetFilter(String filterName){
         widgetPage
                 .clickEditWidgetFilterButton()
                 .selectWidgetFilter(filterName)
-                .hoverOverWidgetFilter(filterName)
-                .clickEditFilterButton()
-                .clickFilterSelector()
-                .selectAdditionalAttribute(parameterName)
-                .setAttributeValueToInput(parameterValue)
                 .clickSubmitButton();
-        log.info("Added parameters {}:{} to filter with name {}", parameterName, parameterValue, parameterValue);
+        log.info("Changed widget filter to {}", filterName);
         return this;
+    }
+
+    @Step
+    public String getWidgetFilterName() {
+        return widgetPage
+                .getWidgetFilterName();
     }
 
     @Step
