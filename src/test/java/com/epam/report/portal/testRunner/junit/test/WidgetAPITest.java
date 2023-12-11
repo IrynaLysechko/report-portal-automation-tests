@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class WidgetAPITest extends BaseTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {2, 3, 4, 5, 6})
+    @ValueSource(ints = {137217, 137218, 137219, 137220, 137221})
     public void verifyUserIsAbleToGetWidgetById(int widgetId) {
         new WidgetApiClient()
                 .getWidgetById(widgetId)
@@ -22,11 +22,11 @@ public class WidgetAPITest extends BaseTest {
 
     @ParameterizedTest
     @CsvSource({
-            "2, LAUNCH STATISTICS AREA",
-            "3, LAUNCH STATISTICS BAR",
-            "4, INVESTIGATED PERCENTAGE OF LAUNCHES",
-            "5, TEST CASES GROWTH TREND CHART",
-            "6, OVERALL STATISTICS PANEL"
+            "137217, LAUNCH STATISTICS AREA",
+            "137218, LAUNCH STATISTICS BAR",
+            "137219, INVESTIGATED PERCENTAGE OF LAUNCHES",
+            "137220, TEST CASES GROWTH TREND CHART",
+            "137221, OVERALL STATISTICS PANEL"
     })
     public void verifyUserIsAbleToReceiveWidgetByIdWithCorrectName(int widgetId, String widgetName) {
         new WidgetApiClient()
@@ -36,7 +36,7 @@ public class WidgetAPITest extends BaseTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/failed_status_code.csv")
+    @CsvFileSource(resources = "/testRunner/failed_status_code.csv")
     public void verifyStatusCodeIsFailedForWrongWidgetId(String widgetId, int expectedStatusCode) {
         new WidgetApiClient()
                 .getWidgetById(widgetId)

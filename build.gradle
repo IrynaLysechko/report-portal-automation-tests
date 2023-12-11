@@ -28,6 +28,7 @@ dependencies {
     implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.5'
     implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.13.5'
     implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-cucumber-jvm', version: '2.13.5'
     implementation group: 'io.qameta.allure', name: 'allure-commandline', version: '2.24.1', ext: 'pom'
     implementation group: 'com.github.automatedowl', name: 'allure-environment-writer', version: '1.0.0'
     implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.20'
@@ -54,13 +55,16 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 
     implementation group: 'com.opencsv', name: 'opencsv', version: '5.8'
+
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.14.0'
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.14.0'
 }
 
 task testUsingTestNG(type: Test) {
     systemProperties(System.getProperties())
 
     useTestNG() {
-        suites './src/test/resources/ReportPortalSuite.xml'
+        suites './src/test/resources/testRunner/ReportPortalSuite.xml'
         options.useDefaultListeners true
         testLogging {
             events = ['PASSED', 'FAILED', 'SKIPPED']
@@ -75,6 +79,18 @@ task testUsingJunit(type: Test) {
     }
     reports.junitXml.enabled = true
     reports.junitXml.destination = file("$buildDir/reports/tests/test/junitreports")
+}
+
+
+task testUsingCucumber(type: Test) {
+    systemProperties(System.getProperties())
+
+    useTestNG() {
+        suites './src/test/resources/bdd/ReportPortalSuite.xml'
+        testLogging {
+            events = ['PASSED', 'FAILED', 'SKIPPED']
+        }
+    }
 }
 
 tasks.withType(Test) {
