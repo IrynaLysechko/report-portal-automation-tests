@@ -3,6 +3,7 @@
 <suite name="Report Portal Test Suite" verbose="1">
     <test name="Report Portal API Tests">
         <classes>
+            <class name="com.epam.report.portal.test.api.BaseTest"/>
             <class name="com.epam.report.portal.test.api.get.WidgetGetPositiveTest"/>
             <class name="com.epam.report.portal.test.api.get.WidgetGetNegativeTest"/>
 
@@ -18,6 +19,7 @@
     </test>
     <test name="Report Portal UI Tests">
         <classes>
+            <class name="com.epam.report.portal.test.ui.BaseTest"/>
             <class name="com.epam.report.portal.test.ui.WidgetDashboardTest"/>
             <class name="com.epam.report.portal.test.ui.WidgetEditTest"/>
         </classes>
