@@ -25,7 +25,7 @@ public class DashboardPageObject extends AbstractPage {
     private final String widgetHeaderElementXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__info-block')]";
     private final String widgetDescriptionTooltipIconXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class, 'description')]";
     private final String widgetEditButtonXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[1]";
-    private final String widgetViewXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'info-block')]";
+    private final String widgetViewXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__meta-info')]";
     private final String deleteWidgetButtonXpath = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class,'widgetHeader__controls-block')]/div[3]";
     private final String fullyPassedDemoLaunchFromWidget = "//div[text()='%s']/ancestor::div[contains(@style, 'transform')]//div[contains(@class, 'launch-statistics-chart')]//*[local-name()='g' and contains(@class, 'c3-chart-bars')]//*[local-name()='g' and contains(@class, 'c3-shapes-statistics$executions$passed')]//*[local-name()='path'][5]";
 
@@ -44,6 +44,11 @@ public class DashboardPageObject extends AbstractPage {
     public DashboardPageObject openDashboardPage() {
         openPage(DASHBOARD_URI);
         return this;
+    }
+
+    @Step
+    public boolean isWidgetWithNameExistsOnDashboard(String widgetName) {
+        return !findListByXpath(format(widgetContainerXpath, widgetName)).isEmpty();
     }
 
     @Step

@@ -1,6 +1,7 @@
 package com.epam.report.portal.test.ui;
 
 import com.epam.report.portal.entity.WidgetTypesContainer;
+import com.epam.report.portal.ui.bo.DashboardBusinessObject;
 import com.epam.report.portal.ui.pages.AddNewWidgetPageObject;
 import com.epam.report.portal.ui.pages.LaunchPageObject;
 import com.epam.report.portal.utils.FileReader;
@@ -29,7 +30,7 @@ public class WidgetDashboardTest extends BaseTest {
         WidgetTypesContainer container = new ObjectMapper()
                 .readValue(widgetTypesJson, WidgetTypesContainer.class);
         List<String> expectedWidgetTypes = container.getWidgetTypes();
-        dashboardBusinessObject
+        new DashboardBusinessObject()
                 .goToAddNewWidgetModalWindow();
         List<String> availableWidgetTypes = new AddNewWidgetPageObject()
                 .getAvailableWidgetTypesList();
@@ -39,6 +40,7 @@ public class WidgetDashboardTest extends BaseTest {
 
     @Test(description = "User is able to move widgets on the dashboard")
     public void verifyUserIsAbleToMoveWidgetsOnTheDashboard() {
+        DashboardBusinessObject dashboardBusinessObject = new DashboardBusinessObject();
         String barContainerPositionBefore = dashboardBusinessObject
                 .getWidgetContainerPosition(LAUNCH_AREA_WIDGET);
         dashboardBusinessObject
@@ -51,7 +53,7 @@ public class WidgetDashboardTest extends BaseTest {
 
     @Test(description = "Verify user is able to navigate to appropriate launch view after clicking on widget content")
     public void verifyUserIsAbleToNavigateToWidgetLaunchView() {
-        dashboardBusinessObject
+        new DashboardBusinessObject()
                 .goToPassedDemoLaunch(LAUNCH_BAR_WIDGET);
         String launchPageUrl = new LaunchPageObject()
                 .waitUntilLaunchPageIsOpened()
@@ -61,7 +63,7 @@ public class WidgetDashboardTest extends BaseTest {
 
     @Test(description = "Verify user is able to scroll to widget on dashboard")
     public void verifyUserIsAbleToScrollToWidgetOnDashboard() {
-        boolean isScrolled = dashboardBusinessObject
+        boolean isScrolled = new DashboardBusinessObject()
                 .scrollToWidgetOnDashboard(FAILED_CASES_TREND);
         Assertions.assertThat(isScrolled).isTrue();
     }

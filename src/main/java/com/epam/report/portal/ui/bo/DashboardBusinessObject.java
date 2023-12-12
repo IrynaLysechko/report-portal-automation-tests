@@ -45,12 +45,17 @@ public class DashboardBusinessObject {
     @Step
     public void deleteWidgetFromDashboard(String widgetName) {
         dashboardPage
-                .openDashboardPage()
-                .hoverOverWidgetHeader(widgetName)
-                .clickDeleteWidgetButton(widgetName)
-                .verifyDeleteWidgetWindowIsOpen()
-                .clickConfirmToDeleteWidgetButton();
-        log.info("Widget with name '{}' was deleted from dashboard", widgetName);
+                .openDashboardPage();
+        if (dashboardPage.isWidgetWithNameExistsOnDashboard(widgetName)) {
+            dashboardPage
+                    .hoverOverWidgetHeader(widgetName)
+                    .clickDeleteWidgetButton(widgetName)
+                    .verifyDeleteWidgetWindowIsOpen()
+                    .clickConfirmToDeleteWidgetButton();
+            log.info("Widget with name '{}' was deleted from dashboard", widgetName);
+        } else {
+            log.info("Widget with name {} does not exist on dashboard", widgetName);
+        }
     }
 
     @Step
@@ -75,7 +80,9 @@ public class DashboardBusinessObject {
 
     @Step
     public String getWidgetContainerPosition(String widgetName) {
-        String styleAttribute = dashboardPage.getWidgetStyleAttribute(widgetName);
+        String styleAttribute = dashboardPage
+                .openDashboardPage()
+                .getWidgetStyleAttribute(widgetName);
         log.info("style {}", styleAttribute);
 
         String position = "";
@@ -91,6 +98,7 @@ public class DashboardBusinessObject {
     @Step
     public void moveWidgetOnDashboard(String from, String to) {
         dashboardPage
+                .openDashboardPage()
                 .performDragAndDropAction(from, to);
     }
 
