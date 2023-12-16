@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -20,8 +21,9 @@ public class DriverFactory {
 
         switch (driverManagerType) {
             case CHROME:
-                webDriver = new ChromeDriver();
-                break;
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                webDriver = new ChromeDriver(chromeOptions);
             case SAFARI:
                 webDriver = new SafariDriver();
                 break;
