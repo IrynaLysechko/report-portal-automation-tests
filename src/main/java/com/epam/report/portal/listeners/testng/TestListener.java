@@ -31,7 +31,13 @@ public class TestListener implements ITestListener, ISuiteListener {
         setUpReport();
         configureRestAssured();
         new SlackApiClient()
-                .sendNotificationToSlackChannel("Test suite " + suite.getName() + " has been started");
+                .sendNotificationToSlackChannel("Test suite [" + suite.getName() + "] has been started");
+    }
+
+    @Override
+    public void onFinish(ISuite suite) {
+        new SlackApiClient()
+                .sendNotificationToSlackChannel("Test suite [" + suite.getName() + "] has been finished");
     }
 
     @Override
