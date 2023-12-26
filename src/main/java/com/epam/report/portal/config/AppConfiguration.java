@@ -103,4 +103,7 @@ public class AppConfiguration {
         return getProperties("slack.project.uri");
     }
 
+    public static String getSauceLabRemoteDriverURI() {
+        return getProperties("sauce.labs.remote.driver");
+    }
 }
