@@ -98,4 +98,9 @@ public class AppConfiguration {
     public static String getJiraToken() {
         return getProperties("jira.token");
     }
+
+    public static String getSlackURI() {
+        return getProperties("slack.project.uri");
+    }
+
 }
