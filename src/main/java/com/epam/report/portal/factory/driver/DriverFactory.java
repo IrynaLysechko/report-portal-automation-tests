@@ -24,6 +24,7 @@ public class DriverFactory {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--headless");
                 webDriver = new ChromeDriver(chromeOptions);
+                break;
             case SAFARI:
                 webDriver = new SafariDriver();
                 break;

@@ -90,4 +90,12 @@ public class AppConfiguration {
     public static String getProjectLaunchUIURI() {
         return getProperties("reportPortal.launch.uri");
     }
+
+    public static String getJiraURI() {
+        return getProperties("jira.uri");
+    }
+
+    public static String getJiraToken() {
+        return getProperties("jira.token");
+    }
 }
