@@ -4,6 +4,8 @@ import com.epam.report.portal.config.AppConfiguration;
 import com.epam.report.portal.integration.slack.SlackApiClient;
 import com.epam.report.portal.logging.LoggerManager;
 import com.epam.report.portal.report.ReportManager;
+import com.epam.reportportal.listeners.LogLevel;
+import com.epam.reportportal.restassured.ReportPortalRestAssuredLoggingFilter;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;
@@ -76,9 +78,8 @@ public class TestListener implements ITestListener, ISuiteListener {
 
     private void configureRestAssured() {
         RestAssured.config = RestAssuredConfig.config().objectMapperConfig(new ObjectMapperConfig(GSON));
-        if (AppConfiguration.getReportTool().equals("allure")) {
-            RestAssured.filters(new AllureRestAssured());
-        }
+        RestAssured.filters(new AllureRestAssured());
+        RestAssured.filters(new ReportPortalRestAssuredLoggingFilter(42, LogLevel.INFO));
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 

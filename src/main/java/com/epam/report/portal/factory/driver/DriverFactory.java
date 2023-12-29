@@ -48,9 +48,7 @@ public class DriverFactory {
 
         switch (driverManagerType) {
             case CHROME:
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless");
-                return new ChromeDriver(chromeOptions);
+                return new ChromeDriver();
             case SAFARI:
                 return new SafariDriver();
             default:
