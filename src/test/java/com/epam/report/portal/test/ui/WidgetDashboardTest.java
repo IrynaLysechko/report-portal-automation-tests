@@ -1,6 +1,8 @@
 package com.epam.report.portal.test.ui;
 
 import com.epam.report.portal.entity.WidgetTypesContainer;
+import com.epam.report.portal.integration.jira.JiraStatusUpdater;
+import com.epam.report.portal.integration.jira.JiraTicketId;
 import com.epam.report.portal.ui.bo.DashboardBusinessObject;
 import com.epam.report.portal.ui.pages.AddNewWidgetPageObject;
 import com.epam.report.portal.ui.pages.LaunchPageObject;
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.assertj.core.api.Assertions;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,10 +23,12 @@ import static com.epam.report.portal.test.ui.data.DataProviderUI.*;
 @Test(groups = {"ui", "dashboard", "all"})
 @Epic("Widget UI test")
 @Feature("Verify user is able to interact with widgets on dashboard")
+@Listeners(JiraStatusUpdater.class)
 public class WidgetDashboardTest extends BaseTest {
 
     @Test(description =
             "Verify user is able to see all available widgets types while adding a new widget")
+    @JiraTicketId("RP-1")
     public void verifyUserIsAbleToSeeAllWidgetsTypesWhenCreateNewWidget() throws IOException {
         String widgetTypesJson = FileReader.readFileFromTestResourcesToString(
                 WIDGET_JSON_PATH + "expected_widgets_types.json");

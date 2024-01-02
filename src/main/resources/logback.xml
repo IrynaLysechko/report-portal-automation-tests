@@ -9,6 +9,13 @@
         </encoder>
     </appender>
 
+    <appender name="RP" class="com.epam.reportportal.logback.appender.ReportPortalAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</pattern>
+            <pattern>[%t] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <appender name="LOGFILE" class="ch.qos.logback.core.FileAppender">
         <file>./log/tests.log</file>
         <append>false</append>
@@ -20,6 +27,7 @@
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="LOGFILE"/>
+        <appender-ref ref="RP"/>
     </root>
 
 </configuration>
