@@ -2,6 +2,6 @@ package com.epam.report.portal.report;
 
 public interface ReportAttachment {
 
-    void attachScreenShootToReport();
+    byte[] attachScreenShootToReport();
     void attachEnvironmentInfoToReport();
 }

@@ -3,7 +3,7 @@ package com.epam.report.portal.test.api.get;
 import com.epam.report.portal.api.client.WidgetApiClient;
 import com.epam.report.portal.entity.FilterResponse;
 import com.epam.report.portal.entity.WidgetPreviewData;
-import com.epam.report.portal.test.BaseTest;
+import com.epam.report.portal.test.api.BaseTest;
 import com.epam.report.portal.test.api.data.DataProviderAPI;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;

@@ -1,8 +1,12 @@
 package com.epam.report.portal.report;
 
 import com.epam.report.portal.config.AppConfiguration;
+import com.epam.report.portal.factory.driver.DriverManager;
 import com.google.common.collect.ImmutableMap;
+import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
@@ -10,8 +14,10 @@ import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnviro
 public class AllureAttachment implements ReportAttachment {
 
     @Override
-    public void attachScreenShootToReport() {
-        // TODO: Implement once browser driver logic will be added
+    @Attachment(value = "Failed test screenshot", type = "image/png")
+    public byte[] attachScreenShootToReport() {
+        log.info("attach screen shoot");
+        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Override

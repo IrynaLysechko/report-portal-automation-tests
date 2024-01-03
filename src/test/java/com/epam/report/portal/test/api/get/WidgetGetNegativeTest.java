@@ -1,7 +1,7 @@
 package com.epam.report.portal.test.api.get;
 
 import com.epam.report.portal.api.client.WidgetApiClient;
-import com.epam.report.portal.test.BaseTest;
+import com.epam.report.portal.test.api.BaseTest;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.apache.http.HttpStatus;
