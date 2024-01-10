@@ -90,4 +90,20 @@ public class AppConfiguration {
     public static String getProjectLaunchUIURI() {
         return getProperties("reportPortal.launch.uri");
     }
+
+    public static String getJiraURI() {
+        return getProperties("jira.uri");
+    }
+
+    public static String getJiraToken() {
+        return getProperties("jira.token");
+    }
+
+    public static String getSlackURI() {
+        return getProperties("slack.project.uri");
+    }
+
+    public static String getSauceLabRemoteDriverURI() {
+        return getProperties("sauce.labs.remote.driver");
+    }
 }
